@@ -1,0 +1,63 @@
+/* dataTablesCustom.css */
+
+/* Styling for "Show X entries" dropdown */
+.dataTables_length select {
+  @apply px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+/* Styling for search input */
+.dataTables_filter input {
+  @apply px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500;
+}
+
+/* Styling for pagination buttons */
+/* index.css */
+
+.dataTables_paginate {
+  @apply flex justify-center items-center mt-4;
+}
+
+.dataTables_paginate .paginate_button {
+  @apply mx-1 px-4 py-2 text-sm font-medium rounded-md border transition-colors;
+}
+
+.dataTables_paginate .paginate_button.current {
+  @apply bg-blue-500 text-white border-blue-500;
+}
+
+.dataTables_paginate .paginate_button:not(.current) {
+  @apply bg-white text-gray-700 border-gray-300 hover:bg-gray-100 hover:text-gray-900;
+}
+
+/* Styling for "Showing X to Y of Z entries" text */
+.dataTables_info {
+  @apply text-sm text-gray-500;
+}
+
+/* Table header styling */
+table.dataTable thead th {
+  @apply bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider py-3 px-6;
+}
+
+/* Table body styling */
+table.dataTable tbody td {
+  @apply py-4 px-6 text-sm text-gray-900;
+}
+
+/* Alternating row colors */
+table.dataTable tbody tr:nth-child(even) {
+  @apply bg-gray-50;
+}
+
+/* Hover effect on rows */
+table.dataTable tbody tr:hover {
+  @apply bg-gray-100;
+}
