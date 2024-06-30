@@ -17,7 +17,7 @@ export default function Payment() {
     }
   }, []);
 
-  console.log("idOrder", idOrder);
+  // console.log("idOrder", idOrder);
 
   // ---------------------------------------------------------------------------------------
   // api get detail order
@@ -38,12 +38,12 @@ export default function Payment() {
       );
       const data = response.data.data;
       setOrder(data);
-      console.log("order", order);
-      console.log("data", data);
+      // console.log("order", order);
+      // console.log("data", data);
       // console.log("bill", bill);
       // console.log("Response setelah isi form:", response.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      // console.error("Error fetching data:", error);
     }
   };
 
@@ -113,13 +113,13 @@ export default function Payment() {
           Data anda berhasil tersimpan
         </div>
 
-        <div className="mt-10 flex justify-between sm:mx-4 max-sm:flex-wrap-reverse max-sm:mx-4 ">
+        <div className="mt-10 flex justify-between sm:mx-4 max-sm:flex-wrap-reverse  ">
           {/* data user */}
           <div>
-            <div className="border shadow-xl shadow-gray-400  rounded-xl pt-10 pb-14  px-4  max-sm:mt-10 max-sm:w-[full]  max-sm:text-xs sm:text-sm">
+            <div className="border shadow-xl shadow-gray-400  rounded-xl pt-10 pb-14  px-4  max-sm:mx-4 max-sm:mt-10 max-sm:w-[full]  max-sm:text-xs sm:text-sm">
               <div className="text-slate-600 font-bold sm:text-lg sm:px-5 max-sm:text-center max-sm:text-lg">
                 {" "}
-                Cek Data Pemesan
+                Cek Data Pemesan <span className="sm:hidden">Dibawah</span>
               </div>
               <div className="flex mt-5 font-medium py-3 px-5 sm:mx-5  bg-black sm:w-[520px]  text-white rounded-t-2xl  max-sm:w-full ">
                 Data Diri Pemesan
@@ -156,7 +156,7 @@ export default function Payment() {
                 {order?.passenger?.map((passenger, index) => (
                   <div
                     key={index}
-                    className="border  shadow-xl shadow-gray-400  rounded-xl pt-10 pb-14  px-4 max-sm:text-xs sm:text-sm"
+                    className="border  shadow-xl shadow-gray-400  rounded-xl pt-10 pb-14  px-4 max-sm:text-xs sm:text-sm max-sm:mx-3"
                   >
                     <div className="text-slate-600 font-bold sm:text-lg sm:mx-5 max-sm:text-center max-sm:mx-3 max-sm:text-lg">
                       Cek Data Penumpang Dibawah
@@ -282,7 +282,7 @@ export default function Payment() {
                     </div>
                   </div>
                 ))}
-                <div className="mt-7">
+                <div className="mt-7 max-sm:mx-3">
                   {" "}
                   <button
                     disabled
@@ -295,9 +295,9 @@ export default function Payment() {
             </div>
           </div>
 
-          <div className="">
-            <div className="sm:w-[520px]  max-sm:text-xs max-sm:mx-3 sm:text-sm">
-              <div className="border-gray-300 border-b-2 mb-3 max-sm:-mt-3"></div>
+          <div className="max-sm:w-full">
+            <div className="sm:w-[520px]  max-sm:text-xs max-sm:mx-3 sm:text-sm border border-gray-300 rounded p-4">
+              {/* <div className="border-gray-300 border-b-2 mb-3 max-sm:-mt-3"></div> */}
               <div className="text-gray-700 flex flex-col text-left">
                 <div className="font-bold mb-2 sm:text-lg text-black max-sm:text-sm">
                   Detail Penerbangan

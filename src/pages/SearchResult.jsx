@@ -222,12 +222,12 @@ export default function SearchResult() {
       )
       .then((response) => {
         setData(response.data.data);
-        console.log("data tiket", data);
+        // console.log("data tiket", data);
         setCurrentPage(page);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log("error", error);
+        // console.log("error", error);
         toast.error("Data Tidak Tersedia, Coba cari yang lain");
         setIsLoading(false);
       });
@@ -274,12 +274,12 @@ export default function SearchResult() {
       )
       .then((response) => {
         setData(response.data.data);
-        console.log("data tiket", data);
+        // console.log("data tiket", data);
         setCurrentPage(page);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log("error", error);
+        // console.log("error", error);
         toast.error("Data Tidak Tersedia, Coba cari yang lain");
         setIsLoading(false);
       });
@@ -353,12 +353,12 @@ export default function SearchResult() {
       )
       .then((response) => {
         setData(response.data.data);
-        console.log("data tiket", data);
+        // console.log("data tiket", data);
         setCurrentPage(page);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log("error", error);
+        // console.log("error", error);
         toast.error("Data Tidak Tersedia, Coba cari yang lain");
         setIsLoading(false);
       });
@@ -394,12 +394,12 @@ export default function SearchResult() {
       )
       .then((response) => {
         setData(response.data.data);
-        console.log("data tiket", response.data.data);
+        // console.log("data tiket", response.data.data);
         setCurrentPage(1);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log("error", error);
+        // console.log("error", error);
         toast.error("Data Tidak Tersedia, Coba cari yang lain");
         setIsLoading(false);
       });
@@ -438,12 +438,12 @@ export default function SearchResult() {
       )
       .then((response) => {
         setData(response.data.data);
-        console.log("data tiket", data);
+        // console.log("data tiket", data);
         setCurrentPage(1);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log("error", error);
+        // console.log("error", error);
         toast.error("Data Tidak Tersedia, Coba cari yang lain");
         setIsLoading(false);
       });
@@ -484,12 +484,12 @@ export default function SearchResult() {
       )
       .then((response) => {
         setData(response.data.data);
-        console.log("data tiket", data);
+        // console.log("data tiket", data);
         setCurrentPage(1);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log("error", error);
+        // console.log("error", error);
         toast.error("Data Tidak Tersedia, Coba cari yang lain");
         setIsLoading(false);
       });

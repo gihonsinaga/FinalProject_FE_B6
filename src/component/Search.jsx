@@ -139,7 +139,7 @@ export default function Search() {
         };
         // console.log("dataSearch", dataSearch);
 
-        console.log("api find ticket (search)", response?.data?.data);
+        // console.log("api find ticket (search)", response?.data?.data);
         // const data = response?.data?.data;
         // setDataa(data);
 
@@ -149,7 +149,7 @@ export default function Search() {
         }, 2000);
       })
       .catch((error) => {
-        console.log("error", error);
+        // console.log("error", error);
         toast.error(error?.response?.data?.message);
       });
   };

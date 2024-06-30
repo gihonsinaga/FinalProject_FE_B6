@@ -60,9 +60,9 @@ export default function Login() {
           />
         </div>
         <div className="pt-24 md:pt-0 flex flex-1 justify-center items-center">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 ">
             <div className="flex flex-row pb-3">
-              <img className="w-[50px]" src={ikon} alt="Login" />
+              <img className="w-[50px] " src={ikon} alt="Login" />
               <h1 className="flex items-center pl-3 font-semibold text-2xl bg-gradient-to-r from-[#535F6B] to-[#C1DEE2] text-transparent bg-clip-text">
                 FlyNow
               </h1>
@@ -106,7 +106,7 @@ export default function Login() {
                 <p className="">Belum punya akun?</p>
                 <Link
                   to="/register"
-                  className="pl-1 font-bold text-blue-500 hover:underline"
+                  className="pl-1 font-bold text-blue-500 hover:underline max-sm:mr-16"
                 >
                   Daftar disini
                 </Link>
@@ -118,7 +118,7 @@ export default function Login() {
               className="flex flex-row shadow w-full h-[40px] self-center mt-3 bg-slate-200 hover:bg-slate-300 focus:shadow-outline focus:outline-none text-black py-2 px-4 rounded-lg justify-center"
             >
               <FcGoogle className="mr-2 mt-1" />
-              <span className="mt-1">Masuk dengan Google </span>
+              <span className="mt-1 max-sm:text-xs">Masuk dengan Google </span>
             </button>
           </div>
           <div>{/* Additional content */}</div>

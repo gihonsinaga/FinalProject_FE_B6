@@ -419,14 +419,14 @@ export default function Nav({ isHomePage }) {
                     handleLogout();
                     toggleMobileMenu();
                   }}
-                  className="block py-2 text-red-800 mt-60 border border-red-800  text-center text-xs"
+                  className="fixed bottom-4 left-4 right-4 block py-2 text-red-800 border border-red-800 text-center text-xs"
                 >
                   Logout
                 </a>
                 <div className="border-gray-300 border-b-2 my-3 sm:hidden mx-36"></div>
               </>
             ) : (
-              <div className="flex mt-96  justify-end ">
+              <div className="fixed bottom-4 left-4 right-2 flex justify-end ">
                 <div
                   onClick={() => {
                     navigate("/Login", {
@@ -434,7 +434,7 @@ export default function Nav({ isHomePage }) {
                     });
                     toggleMobileMenu();
                   }}
-                  className="block mr-2 py-2 text-slate-900 text-xs border-slate-700 border p-4 "
+                  className="block  mr-2 py-2 text-slate-900 text-xs border-slate-700 border p-4 "
                 >
                   Login
                 </div>

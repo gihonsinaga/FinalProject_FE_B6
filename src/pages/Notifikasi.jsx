@@ -184,7 +184,7 @@ export default function Notifikasi() {
   // };
 
   const [currentPage, setCurrentPage] = useState(1);
-  console.log("currentPage", currentPage);
+  // console.log("currentPage", currentPage);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {

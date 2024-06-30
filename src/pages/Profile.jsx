@@ -88,7 +88,7 @@ export default function Profile() {
 
       const data = await response.json();
 
-      console.log("Profile updated successfully:", data);
+      // console.log("Profile updated successfully:", data);
       dispatch(setUser(data));
 
       localStorage.setItem("avatar_url", data.data.avatar_url);
@@ -105,7 +105,7 @@ export default function Profile() {
       // Show success toast
       toast.success("Profile updated successfully!");
     } catch (error) {
-      console.error("Error updating profile:", error);
+      // console.error("Error updating profile:", error);
 
       // Show error toast
       toast.error("Failed to update profile!");

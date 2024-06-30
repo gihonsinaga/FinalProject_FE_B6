@@ -79,7 +79,7 @@ export default function AdminPage() {
       navigate("/");
     }
   });
-  console.log("role", role);
+  // console.log("role", role);
 
   const [planes, setPlanes] = useState([]);
   const token = useSelector((state) => state.auth.token);
@@ -317,7 +317,7 @@ export default function AdminPage() {
         );
         if (response.data.status) {
           setUsers(response.data.data);
-          console.log("first", response.data.data);
+          // console.log("first", response.data.data);
         }
       } catch (error) {
         console.error("Error fetching data", error);
@@ -452,7 +452,7 @@ export default function AdminPage() {
           }
         );
         setPlanes(response.data.data);
-        console.log("pesawat", response.data.data);
+        // console.log("pesawat", response.data.data);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -476,7 +476,7 @@ export default function AdminPage() {
           }
         );
         setUserData(response.data.data);
-        console.log("admin count", response.data.data);
+        // console.log("admin count", response.data.data);
       } catch (error) {
         setError(error.message);
       } finally {

@@ -93,7 +93,7 @@ export default function AdminPemesanan() {
       alert("Anda bukan admin");
     }
   });
-  console.log("role", role);
+  // console.log("role", role);
 
   useEffect(() => {
     const storedImage = localStorage.getItem("avatar_url");
@@ -158,7 +158,7 @@ export default function AdminPemesanan() {
 
       const data = await response.json();
 
-      console.log("Profile updated successfully:", data);
+      // console.log("Profile updated successfully:", data);
       dispatch(setUser(data));
 
       // Store updated avatar_url to localStorage
@@ -208,7 +208,7 @@ export default function AdminPemesanan() {
           }
         );
         setUserData(response.data.data);
-        console.log("admin count", response.data.data);
+        // console.log("admin count", response.data.data);
       } catch (error) {
         setError(error.message);
       } finally {

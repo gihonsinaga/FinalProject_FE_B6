@@ -53,7 +53,7 @@ export default function PaymentOrder() {
       // console.log("bill", bill);
       // console.log("Response setelah isi form:", response.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      // console.error("Error fetching data:", error);
     }
   };
 
@@ -136,10 +136,10 @@ export default function PaymentOrder() {
       );
       const dataPayment = response.data.data;
       setPaymentData(dataPayment);
-      console.log("data payment biasa", dataPayment);
+      // console.log("data payment biasa", dataPayment);
       setOpenStatusModal(true);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      // console.error("Error fetching data:", error);
       toast.error(error?.response?.data?.message);
     }
   };
@@ -162,7 +162,7 @@ export default function PaymentOrder() {
       );
       const dataMidtrans = response.data.data;
       // setPaymentData(dataMidtrans);
-      console.log("data midtrans", dataMidtrans);
+      // console.log("data midtrans", dataMidtrans);
       const url = response.data.data.redirect_url;
       // console.log("url", url);
       window.open(url, "_blank");
@@ -176,7 +176,7 @@ export default function PaymentOrder() {
         },
       });
     } catch (error) {
-      console.error("Error fetching data:", error);
+      // console.error("Error fetching data:", error);
       toast.error("silahkan masukkan data yang benar");
     }
   };
@@ -286,15 +286,15 @@ export default function PaymentOrder() {
           </div>
         </div>
 
-        <div className="mt-10 flex justify-between mx-7 max-sm:flex-wrap-reverse">
+        <div className="mt-10 flex justify-between sm:mx-7 max-sm:flex-wrap-reverse">
           {/* pilih payment */}
-          <div className="max-sm:text-sm">
+          <div className="max-sm:text-sm max-sm:mx-3">
             <div className="text-slate-600 font-bold sm:text-xl max-sm:text-base max-sm:mt-10 max-sm:text-center ">
               Isi Data Pembayaran
             </div>
-            <div className="border-blue-300 border-b-2 my-3 sm:hidden mx-36 max-sm:mt-2"></div>
+            <div className="border-slate-50 border-b-2 my-3 sm:hidden px-40 max-sm:mt-2"></div>
 
-            <div className="flex flex-col items-center sm:mt-5 max-sm:mr-3">
+            <div className="flex flex-col items-center sm:mt-5 max-sm:mr-5 ">
               <div className="sm:w-[550px] max-sm:w-full">
                 {/* midtrans Section */}
                 <div
@@ -479,14 +479,15 @@ export default function PaymentOrder() {
             </div>
           </div>
 
-          <div className="">
-            <div className="sm:w-[520px] max-sm:w-[full] max-sm:text-xs sm:text-sm">
+          <div className="max-sm:w-full">
+            <div className="sm:w-[520px] max-sm:text-xs sm:text-sm border border-gray-300 rounded p-4 max-sm:mx-3">
               <div className="text-gray-700 flex flex-col text-left">
+                {/* <div className="border-gray-300 border-b-2 mb-3"></div> */}
+
                 <div className="font-bold mb-2 sm:text-lg text-black max-sm:text-sm ">
                   Booking code :{" "}
                   <span className="text-blue-500 italic">{order?.code}</span>
                 </div>
-                <div className="border-gray-300 border-b-2 mb-3"></div>
                 <div>
                   <div>
                     {" "}

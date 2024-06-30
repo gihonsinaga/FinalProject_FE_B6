@@ -193,7 +193,7 @@ export default function AdminPengguna() {
         );
         if (response.data.status) {
           setUsers(response.data.data);
-          console.log("first", response.data.data);
+          // console.log("first", response.data.data);
         }
       } catch (error) {
         console.error("Error fetching data", error);

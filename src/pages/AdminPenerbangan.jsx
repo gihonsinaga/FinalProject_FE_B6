@@ -47,7 +47,7 @@ export default function AdminPage() {
       navigate("/");
     }
   });
-  console.log("role", role);
+  // console.log("role", role);
   const navigation = [
     { name: "Dashboard", href: "/admin", icon: HomeIcon, current: false },
     {
@@ -101,7 +101,7 @@ export default function AdminPage() {
           }
         );
         setPlanes(response.data.data);
-        console.log("pesawat", response.data.data);
+        // console.log("pesawat", response.data.data);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -124,7 +124,7 @@ export default function AdminPage() {
           }
         );
         setUserData(response.data.data);
-        console.log("admin count", response.data.data);
+        // console.log("admin count", response.data.data);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -146,7 +146,7 @@ export default function AdminPage() {
       );
       const cityNames = response.data.data.map((city) => city.name);
       setCities(cityNames);
-      console.log("City names:", cityNames);
+      // console.log("City names:", cityNames);
     } catch (error) {
       console.error("Error fetching cities:", error);
     }
@@ -172,7 +172,7 @@ export default function AdminPage() {
         (countries) => countries.name
       );
       setCountries(countriesName);
-      console.log("countriesName:", countriesName);
+      // console.log("countriesName:", countriesName);
     } catch (error) {
       console.error("Error fetching countries:", error);
     }
@@ -192,7 +192,7 @@ export default function AdminPage() {
         (continents) => continents.name
       );
       setContinents(continentsName);
-      console.log("continentsName", continentsName);
+      // console.log("continentsName", continentsName);
     } catch (error) {
       console.error("Error fetching continents:", error);
     }

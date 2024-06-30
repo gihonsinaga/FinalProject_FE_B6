@@ -180,7 +180,7 @@ export default function History() {
       );
       const dataSearch = response.data.data;
       setData(dataSearch);
-      console.log("dataSearch", dataSearch);
+      // console.log("dataSearch", dataSearch);
 
       // console.log("Order details fetched:", orderDetails);
     } catch (error) {
@@ -278,7 +278,7 @@ export default function History() {
       );
       const dataFiltered = response.data.data;
       setData(dataFiltered);
-      console.log(`Data filtered by ${status}:`, dataFiltered);
+      // console.log(`Data filtered by ${status}:`, dataFiltered);
     } catch (error) {
       console.error(`Error fetching orders with status ${status}:`, error);
     }
@@ -301,6 +301,12 @@ export default function History() {
   };
 
   // -------------------------------------------------------------------------
+
+  const handleButtonClick2 = () => {
+    if (formRef.current) {
+      formRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="">
@@ -548,7 +554,10 @@ export default function History() {
                 </div>
               </div>
 
-              <div className="sm:w-[620px] overflow-y-scroll sm:mt-5 sm:h-[750px] max-sm:h-[500px] max-sm:mt-5 max-sm:w-[full] max-sm:mr-5">
+              <div
+                onClick={handleButtonClick2}
+                className="sm:w-[620px] overflow-y-scroll sm:mt-5 sm:h-[750px] max-sm:h-[500px] max-sm:mt-5 max-sm:w-[full] max-sm:mr-5"
+              >
                 {data.map((order) => (
                   <div
                     className="cursor-pointer shadow-xl ml-5 border-2 bg-slate-200 px-6 py-4 sm:mr-10 rounded-xl mb-10 transition duration-300 ease-in-out transform hover:scale-105"
@@ -663,6 +672,8 @@ export default function History() {
 
           {orderDetails && (
             <div className="sm:mt-5 max-sm:text-xs">
+              <div className="sm:hidden" ref={formRef}></div>
+
               <div className="border-gray-300 border-b-2  sm:hidden mx-36  mb-3 max-sm:-mt-3"></div>
               <div className="sm:hidden max-sm:mb-5 sm:text-xl max-sm:text-base font-bold text-black justify-center flex sm:mb-5">
                 Tiket Anda

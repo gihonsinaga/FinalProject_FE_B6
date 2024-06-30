@@ -22,7 +22,7 @@ export default function UpdateSandi() {
       toast.error("Please input your email first");
       navigate("/lupasandi");
     }
-    console.log("Token from URL:", token);
+    // console.log("Token from URL:", token);
   }, [location]);
 
   const handlePasswordChange = (event) => {
@@ -86,7 +86,7 @@ export default function UpdateSandi() {
         }
       }
     } catch (error) {
-      console.error("Network error:", error);
+      // console.error("Network error:", error);
       toast.error("Failed to connect to the server.");
     }
   };

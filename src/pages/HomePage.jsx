@@ -71,7 +71,7 @@ export default function HomePage() {
         const response = await axios.get(url);
         if (response.status === 200) {
           const dataCategoryFilter = response.data.data;
-          console.log("response category filter", dataCategoryFilter);
+          // console.log("response category filter", dataCategoryFilter);
           setRecomendation(dataCategoryFilter);
         } else {
           console.error("Error fetching recommendations:", response);
@@ -96,10 +96,10 @@ export default function HomePage() {
 
   const getRandomImage = () => {
     const images = [
-      "assets/recomend2.svg",
-      "assets/recomend3.svg",
-      "assets/recomend5.svg",
-      "assets/recomend6.svg",
+      // "assets/recomend2.svg",
+      // "assets/recomend3.svg",
+      // "assets/recomend5.svg",
+      // "assets/recomend6.svg",
     ];
     return images[Math.floor(Math.random() * images.length)];
   };
@@ -161,7 +161,7 @@ export default function HomePage() {
         time_departure_to: "24:00",
       },
     };
-    console.log("data", data);
+    // console.log("data", data);
     axios
       .post(
         "https://express-development-3576.up.railway.app/api/v1/ticket/schedule?page=1",
@@ -181,7 +181,7 @@ export default function HomePage() {
         }, 2000);
       })
       .catch((error) => {
-        console.log("error", error);
+        // console.log("error", error);
       });
 
     onClosePassengerModal();
@@ -341,7 +341,7 @@ export default function HomePage() {
                   <div className="sm:mx-3 ">
                     <div>
                       <img
-                        src={getRandomImage()}
+                        // src={getRandomImage()}
                         alt=""
                         className="sm:w-[250px] sm:h-[200px] max-sm:w-[200px] max-sm:object-cover"
                       />

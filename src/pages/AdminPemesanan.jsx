@@ -100,7 +100,7 @@ export default function AdminPemesanan() {
           }
         );
         setUserData(response.data.data);
-        console.log("admin count", response.data.data);
+        // console.log("admin count", response.data.data);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -129,7 +129,7 @@ export default function AdminPemesanan() {
       );
       const sortedOrders = response.data.data.sort((a, b) => a.id - b.id);
       setOrderHistory(sortedOrders);
-      console.log("Order data:", response.data.data);
+      // console.log("Order data:", response.data.data);
     } catch (error) {
       console.error("Error fetching orders:", error);
     }

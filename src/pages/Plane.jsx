@@ -9,7 +9,7 @@ export default function Plane() {
   const [detailPlane, setDetailPlane] = useState(null);
   const [visiblePlanes, setVisiblePlanes] = useState(9);
   const [loading, setLoading] = useState(false);
-  console.log("end");
+  // console.log("end");
 
   useEffect(() => {
     const getPlanes = async () => {
@@ -20,10 +20,10 @@ export default function Plane() {
         if (response.status === 200) {
           setPlanes(response.data.data);
         } else {
-          console.error("Error fetching planes:", response);
+          // console.error("Error fetching planes:", response);
         }
       } catch (error) {
-        console.error("Error fetching planes:", error);
+        // console.error("Error fetching planes:", error);
       }
     };
 
@@ -44,10 +44,10 @@ export default function Plane() {
       if (response.status === 200) {
         setDetailPlane(response.data.data);
       } else {
-        console.error("Error fetching plane details:", response);
+        // console.error("Error fetching plane details:", response);
       }
     } catch (error) {
-      console.error("Error fetching plane details:", error);
+      // console.error("Error fetching plane details:", error);
     } finally {
       setLoading(false);
     }
