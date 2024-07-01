@@ -27,6 +27,9 @@ import AdminPesawat from "./pages/AdminPesawat.jsx";
 import React from "react";
 import GoogleCallback from "./component/GoogleCallback";
 import PageNotFound from "./component/PageNotFound.jsx";
+import AboutUS from "./pages/AboutUS.jsx";
+import Plane from "./pages/Plane.jsx";
+import ChangePassword from "./pages/ChangePassword.jsx";
 
 function App() {
   return (
@@ -59,7 +62,6 @@ function App() {
               <Route path="/plane" element={<Plane />} />
               <Route path="/changepassword" element={<ChangePassword />} />
               <Route path="*" element={<PageNotFound />} />
-
               <Route path="/admin/profile" element={<AdminProfile />} />
               <Route path="/google/callback" element={<GoogleCallback />} />
             </Routes>
