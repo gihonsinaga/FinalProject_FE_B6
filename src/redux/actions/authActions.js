@@ -153,7 +153,7 @@ export const registerLoginWithGoogleAction = (accessToken, navigate) => async (d
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'https://shy-cloud-3319.fly.dev/api/v1/auth/google',
+      url: 'https://express-development-3576.up.railway.app/api/v1/users/loginGoogle',
       headers: {
         'Content-Type': 'application/json',
       },
