@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store.js";
 import { PersistGate } from "redux-persist/integration/react";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import Home from "./pages/HomePage";
 import Login from "./pages/Login";
@@ -18,22 +19,21 @@ import DonePayment from "./pages/DonePayment.jsx";
 import Notifikasi from "./pages/Notifikasi";
 import AdminPage from "./pages/AdminPage.jsx";
 import Profile from "./pages/Profile.jsx";
-import AboutUS from "./pages/AboutUS.jsx";
-import Plane from "./pages/Plane.jsx";
-import ChangePassword from "./pages/ChangePassword.jsx";
 import AdminPemesanan from "./pages/AdminPemesanan.jsx";
 import AdminPenerbangan from "./pages/AdminPenerbangan.jsx";
 import AdminPengguna from "./pages/AdminPenguna.jsx";
 import AdminProfile from "./pages/AdminProfile.jsx";
 import AdminPesawat from "./pages/AdminPesawat.jsx";
-// import React, { useEffect } from "react";
-import React, { useEffect } from "react";
+import React from "react";
 import GoogleCallback from "./component/GoogleCallback";
 import PageNotFound from "./component/PageNotFound.jsx";
+import AboutUS from "./pages/AboutUS.jsx";
+import Plane from "./pages/Plane.jsx";
+import ChangePassword from "./pages/ChangePassword.jsx";
 
 function App() {
   return (
-    <div className="">
+    <GoogleOAuthProvider clientId="273002041171-3dfn8sgqm2iepnts1bdmrtgr6i2ecjjn.apps.googleusercontent.com">
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <BrowserRouter>
@@ -62,16 +62,13 @@ function App() {
               <Route path="/plane" element={<Plane />} />
               <Route path="/changepassword" element={<ChangePassword />} />
               <Route path="*" element={<PageNotFound />} />
-              <Route
-                path="/google/callback"
-                element={<GoogleCallback />}
-              />{" "}
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/admin/profile" element={<AdminProfile />} />
+              <Route path="/google/callback" element={<GoogleCallback />} />
             </Routes>
           </BrowserRouter>
         </PersistGate>
       </Provider>
-    </div>
+    </GoogleOAuthProvider>
   );
 }
 
