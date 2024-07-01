@@ -116,7 +116,7 @@ export default function AboutUS() {
                                     </div>
                                 </div>
                                 <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
-                                    <img src={loginPict} alt="Anggota Tim 2" className="w-full h-48 object-cover"/>
+                                    <img src="src/assets/akhdan.jpg" alt="Anggota Tim 2" className="w-full h-48 object-cover"/>
                                     <div className="p-6">
                                         <h3 className="text-xl font-semibold text-secondaryBlue mb-1">Akhdan Robbani</h3>
                                         <p className="text-sm text-gray-600">Back End Developer</p>
