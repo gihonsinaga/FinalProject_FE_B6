@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BottomNav from "../component/BottomNav";
 // import ikon from "../assets/iFon.svg";
 // import { useDispatch, useSelector } from "react-redux";
-import { login, googleLogin } from "../redux/actions/authActions";
+import { login, googleLogin , handleGoogleCallback} from "../redux/actions/authActions";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -28,6 +28,15 @@ export default function Login() {
       navigate("/");
     }
   }, []);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+
+    if (token) {
+      dispatch(handleGoogleCallback());
+    }
+  }, [dispatch, location]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -118,7 +127,7 @@ export default function Login() {
               className="flex flex-row shadow w-full h-[40px] self-center mt-3 bg-slate-200 hover:bg-slate-300 focus:shadow-outline focus:outline-none text-black py-2 px-4 rounded-lg justify-center"
             >
               <FcGoogle className="mr-2 mt-1" />
-              <span className="mt-1 lg:mt-0 max-sm:text-xs">Masuk dengan Google r</span>
+              <span className="mt-1 lg:mt-0 max-sm:text-xs">Masuk dengan Google</span>
             </button>
           </div>
           <div>{/* Additional content */}</div>

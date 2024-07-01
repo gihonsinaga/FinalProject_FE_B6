@@ -148,39 +148,26 @@ export const googleLogin = () => {
 
 export const handleGoogleCallback = (navigate) => async (dispatch) => {
   try {
-    // Dapatkan token dari URL
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
 
     if (token) {
-      // Simpan token ke localStorage
       localStorage.setItem('token', token);
-
-      console.log('token', token);
-      // Decode token untuk mendapatkan informasi user
-      const decodedToken = JSON.parse(atob(token.split('.')[1]));
-
-      // Update state
       dispatch(setToken(token));
       dispatch(setIsLoggedIn(true));
-      dispatch(setUser(decodedToken.email || '')); // Asumsi email ada di token
-      dispatch(setRole(decodedToken.role || 'user')); // Asumsi role ada di token
+      
+      // Decode token to get user info (adjust as needed based on your token structure)
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      dispatch(setUser(decodedToken.email || ''));
+      dispatch(setRole(decodedToken.role || 'user'));
 
+      window.history.replaceState({}, document.title, "/");
       toast.success("Google login successful!");
-
-      // Redirect berdasarkan role
-      if (decodedToken.role === "admin") {
-        navigate("/admin");
-      } else {
-        navigate("/");
-      }
     } else {
       toast.error("Login failed: No token provided");
-      navigate("/login");
     }
   } catch (error) {
     console.error("Google login error:", error);
     toast.error("An error occurred during Google login!");
-    navigate("/login");
   }
 };
