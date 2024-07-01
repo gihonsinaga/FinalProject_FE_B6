@@ -155,6 +155,7 @@ export const handleGoogleCallback = (navigate) => async (dispatch) => {
       localStorage.setItem('token', token);
       dispatch(setToken(token));
       dispatch(setIsLoggedIn(true));
+    
       
       // Decode token to get user info (adjust as needed based on your token structure)
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
@@ -162,6 +163,7 @@ export const handleGoogleCallback = (navigate) => async (dispatch) => {
       dispatch(setRole(decodedToken.role || 'user'));
 
       window.history.replaceState({}, document.title, "/");
+      navigate("/")
       toast.success("Google login successful!");
     } else {
       toast.error("Login failed: No token provided");
