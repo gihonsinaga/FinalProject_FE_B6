@@ -7,6 +7,7 @@ import loginPict from "../assets/login.png";
 import ikon from "/assets/LogoFlyNow.svg";
 import { register } from "../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
+import { useGoogleLogin } from '@react-oauth/google';
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -22,9 +23,23 @@ export default function Register() {
   useEffect(() => {
     if (token !== null) {
       alert("Please log out first before signing up again");
-      navigate("/LandingPage");
+      navigate("/");
     }
   }, []);
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      const { access_token } = tokenResponse;
+      dispatch(registerLoginWithGoogleAction(access_token, navigate));
+    },
+    onError: () => {
+      toast.error('Google login failed!');
+    },
+  });
+
+  const handleGoogleLogin = () => {
+    dispatch(googleLogin());
+  };
 
   const handlePhoneNumberChange = (e) => {
     const phoneNumber = e.target.value.replace(/\D/g, "").slice(0, 13);
@@ -127,7 +142,9 @@ export default function Register() {
               </div>
             </div>
             <div className="border bt-2"></div>
-            <button className="flex flex-row shadow w-full h-[40px] self-center mt-3 bg-slate-200 hover:bg-slate-300 focus:shadow-outline focus:outline-none text-black py-2 sm:px-4 max-sm:px-10 rounded-lg justify-center sm:text-sm max-sm:text-xs">
+            <button 
+            onClick={handleGoogleLogin}
+            className="flex flex-row shadow w-full h-[40px] self-center mt-3 bg-slate-200 hover:bg-slate-300 focus:shadow-outline focus:outline-none text-black py-2 sm:px-4 max-sm:px-10 rounded-lg justify-center sm:text-sm max-sm:text-xs">
               <FcGoogle className="mr-2 mt-1" />
               <span className="mt-1 max-sm:text-xs">Masuk dengan Google </span>
             </button>

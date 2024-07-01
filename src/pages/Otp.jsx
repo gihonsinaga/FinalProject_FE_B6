@@ -57,10 +57,11 @@ export default function Otp() {
       await axios.put(
         "https://express-development-3576.up.railway.app/api/v1/users/verify-otp",
         {
-          email,
+          email: email,
           otp: otpCode,
         }
       );
+
       toast.success("OTP verification successful!");
 
       setTimeout(() => {
