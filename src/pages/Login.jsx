@@ -1,20 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, Link, useLocation } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
-import { Toaster } from "react-hot-toast";
-import "../index.css";
-import loginPict from "../assets/login.png";
-import ikon from "/assets/LogoFlyNow.svg";
-// import { login } from "../redux/actions/authActions";
-import { useDispatch, useSelector } from "react-redux";
-import BottomNav from "../component/BottomNav";
-// import ikon from "../assets/iFon.svg";
-// import { useDispatch, useSelector } from "react-redux";
-import { login, googleLogin } from "../redux/actions/authActions";
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc';
+import { Toaster } from 'react-hot-toast';
+import '../index.css';
+import loginPict from '../assets/login.png';
+import ikon from '/assets/LogoFlyNow.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import BottomNav from '../component/BottomNav';
+import { login, googleLogin, handleGoogleCallback } from '../redux/actions/authActions';
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,10 +21,11 @@ export default function Login() {
 
   useEffect(() => {
     if (token !== null) {
-      alert("Please log out first before signing up again");
-      navigate("/");
+      alert('Please log out first before signing up again');
+      navigate('/');
     }
-  }, []);
+  }, [token, navigate]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,13 +35,12 @@ export default function Login() {
       password: password,
     });
 
-    // dispatch(login(data, navigate));
-    const redirectTo = location.state?.from || "/";
+    const redirectTo = location.state?.from || '/';
     dispatch(login(data, navigate, redirectTo));
   };
 
   const handleGoogleLogin = () => {
-    dispatch(googleLogin(navigate));
+    dispatch(googleLogin());
   };
 
   useEffect(() => {
@@ -57,11 +54,7 @@ export default function Login() {
       </div>
       <div className="flex flex-row-reverse">
         <div className="max-sm:hidden flex flex-1 justify-end w-full h-screen flex-shrink flex-grow">
-          <img
-            className="sm:w-full rounded-l-[70px]"
-            src={loginPict}
-            alt="Login"
-          />
+          <img className="sm:w-full rounded-l-[70px]" src={loginPict} alt="Login" />
         </div>
         <div className="pt-24 md:pt-0 flex flex-1 justify-center items-center">
           <div className="flex flex-col gap-4 ">
@@ -71,7 +64,7 @@ export default function Login() {
                 FlyNow
               </h1>
             </div>
-            <p className="text-lg   font-semibold sm:pt-8 hidden">Login</p>
+            <p className="text-lg font-semibold sm:pt-8 hidden">Login</p>
             <div>
               <form onSubmit={handleSubmit} className="flex gap-2">
                 <div className="flex flex-col gap-3 w-full sm:text-sm max-sm:text-xs mt-10">
@@ -108,10 +101,12 @@ export default function Login() {
             <div>
               <div className="flex flex-row justify-center mt-3 sm:text-sm max-sm:text-xs">
                 <p className="">Belum punya akun?</p>
+
                 <Link
                   to="/register"
                   className="pl-1 font-bold text-blue-500 hover:underline max-sm:mr-20"
                 >
+
                   Daftar disini
                 </Link>
               </div>
@@ -122,9 +117,11 @@ export default function Login() {
               className="flex flex-row shadow w-full h-[40px] self-center mt-3 bg-slate-200 hover:bg-slate-300 focus:shadow-outline focus:outline-none text-black py-2 px-4 rounded-lg justify-center"
             >
               <FcGoogle className="mr-2 mt-1" />
+
               <span className="mt-1 max-sm:text-xs sm:text-sm">
                 Masuk dengan Google{" "}
               </span>
+
             </button>
           </div>
           <div>{/* Additional content */}</div>

@@ -7,6 +7,8 @@ import {
 } from "../reducers/authReducers";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { useGoogleLogin } from '@react-oauth/google';
+
 
 export const login = (data, navigate, redirectTo) => async (dispatch) => {
   // console.log("redirectPath", redirectTo);
@@ -142,32 +144,49 @@ export const authenticateUser = () => async (dispatch, getState) => {
   }
 };
 
-export const googleLogin = () => {
-  window.location.href =
-    "https://express-development-3576.up.railway.app/api/v1/users/google";
-};
 
-export const handleGoogleCallback = (navigate) => async (dispatch) => {
+export const registerLoginWithGoogleAction = (accessToken, navigate) => async (dispatch) => {
   try {
-    const response = await axios.get(
-      "https://express-development-3576.up.railway.app/api/v1/users/google/callback"
-    );
-    if (response.data.status === true) {
-      const { token, role, email } = response.data.data.user;
-      dispatch(setToken(token));
-      dispatch(setIsLoggedIn(true));
-      dispatch(setUser(email));
-      dispatch(setRole(role));
-      toast.success("Google login successful!");
-      if (role === "admin") {
-        navigate("/admin");
-      } else {
-        navigate("/");
-      }
-    } else {
-      toast.error(response.data.message || "Google login failed!");
-    }
+    let data = JSON.stringify({
+      access_token: accessToken,
+    });
+
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://express-development-3576.up.railway.app/api/v1/users/loginGoogle',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+
+    const response = await axios.request(config);
+    const { token } = response.data.data;
+
+    dispatch(setToken(token));
+    dispatch(setIsLoggedIn(true));
+    dispatch(getMe(null, null, null));
+    navigate('/LandingPage');
+
+
   } catch (error) {
-    toast.error("An error occurred during Google login!");
+    if (axios.isAxiosError(error)) {
+      toast.error(error.response.data.message);
+      return;
+    }
+    toast.error(error.message);
   }
 };
+
+
+export const googleLogin = useGoogleLogin({
+  onSuccess: async (tokenResponse) => {
+    const { access_token } = tokenResponse;
+    dispatch(registerLoginWithGoogleAction(access_token, navigate));
+  },
+  onError: () => {
+    toast.error('Google login failed!');
+  },
+});
+
