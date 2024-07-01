@@ -22,8 +22,6 @@ import Modal from "react-responsive-modal";
 import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
-  const token = useSelector((state) => state.auth.token);
-console.log('token', token)
   // -----------------------------------------------------------------------------------------
 
   const formRef = useRef(null);

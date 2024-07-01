@@ -179,13 +179,3 @@ export const registerLoginWithGoogleAction = (accessToken, navigate) => async (d
     toast.error(error.message);
   }
 };
-
-export const googleLogin = (navigate) => useGoogleLogin({
-  onSuccess: async (tokenResponse) => {
-    const { access_token } = tokenResponse;
-    dispatch(registerLoginWithGoogleAction(access_token, navigate));
-  },
-  onError: () => {
-    toast.error('Google login failed!');
-  },
-});

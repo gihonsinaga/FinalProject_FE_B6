@@ -7,7 +7,8 @@ import loginPict from '../assets/login.png';
 import ikon from '/assets/LogoFlyNow.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import BottomNav from '../component/BottomNav';
-import { login, googleLogin } from '../redux/actions/authActions';
+import { login, registerLoginWithGoogleAction } from '../redux/actions/authActions';
+import { useGoogleLogin } from '@react-oauth/google';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -21,7 +22,6 @@ export default function Login() {
 
   useEffect(() => {
     if (token !== null) {
-      alert('Please log out first before signing up again');
       navigate('/');
     }
   }, [token, navigate]);
@@ -38,8 +38,20 @@ export default function Login() {
     dispatch(login(data, navigate, redirectTo));
   };
 
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      const { access_token } = tokenResponse;
+      dispatch(registerLoginWithGoogleAction(access_token, navigate));
+    },
+    onError: () => {
+      toast.error('Google login failed!');
+    },
+  });
+
+
+
   const handleGoogleLogin = () => {
-    dispatch(googleLogin(navigate));
+    dispatch(googleLogin());
   };
 
   return (
