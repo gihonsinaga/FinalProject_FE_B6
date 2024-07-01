@@ -25,12 +25,12 @@ export default function ChangePassword() {
     event.preventDefault();
 
     if (!oldPassword || !newPassword || !newPasswordConfirmation) {
-      toast.error("All fields must be provided.");
+      toast.error("Semua kolom harus diisi.");
       return;
     }
 
     if (newPassword !== newPasswordConfirmation) {
-      toast.error("Passwords do not match!");
+      toast.error("Kata sandi tidak cocok!");
       return;
     }
 
@@ -54,7 +54,7 @@ export default function ChangePassword() {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success("Your password has been successfully changed.");
+        toast.success("Kata sandi Anda berhasil diubah.");
         setOldPassword("");
         setNewPassword("");
         setNewPasswordConfirmation("");
@@ -65,19 +65,19 @@ export default function ChangePassword() {
         if (response.status === 400) {
           toast.error(
             data.message ||
-              "All fields must be provided and passwords must match the required format."
+              "Semua kolom harus diisi dan kata sandi harus sesuai dengan format yang diperlukan."
           );
         } else if (response.status === 401) {
-          toast.error("Incorrect old password.");
+          toast.error("Kata sandi lama tidak benar.");
         } else if (response.status === 404) {
-          toast.error("User not found.");
+          toast.error("Pengguna tidak ditemukan.");
         } else {
-          toast.error(data.message || "An error occurred.");
+          toast.error(data.message || "Terjadi kesalahan.");
         }
       }
     } catch (error) {
-      console.error("Network error:", error);
-      toast.error("Failed to connect to the server.");
+      console.error("Kesalahan jaringan:", error);
+      toast.error("Gagal terhubung ke server.");
     }
   };
 
@@ -152,7 +152,7 @@ export default function ChangePassword() {
                           <div className="grid grid-cols-6 gap-6">
                             <div className="col-span-6 sm:col-span-4 mb-2">
                               <label className="block text-xs font-medium text-gray-400 mb-1">
-                                Old Password
+                                Password Lama
                               </label>
                               <input
                                 type="password"
@@ -167,7 +167,7 @@ export default function ChangePassword() {
 
                             <div className="col-span-6 sm:col-span-4 mb-2">
                               <label className="block text-xs font-medium text-gray-400 mb-1">
-                                New Password
+                                Password Baru
                               </label>
                               <input
                                 type="password"
@@ -182,7 +182,7 @@ export default function ChangePassword() {
 
                             <div className="col-span-6 sm:col-span-4 mb-2">
                               <label className="block text-xs font-medium text-gray-400 mb-1">
-                                Confirm New Password
+                                Konfirmasi Password Baru
                               </label>
                               <input
                                 type="password"
