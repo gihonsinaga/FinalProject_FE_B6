@@ -364,7 +364,7 @@ export default function AdminPage() {
             },
           }
         );
-        console.log(response.data);
+        // console.log(response.data);
         toast.success("Penerbangan Berhasil Ditambahkan");
 
         setTimeDeparture("12:00");
@@ -385,7 +385,7 @@ export default function AdminPage() {
         });
         setCategory([]);
       } catch (error) {
-        console.error(error);
+        // console.error(error);
         toast.error(error.response.data.message);
         // Tangani error, seperti menampilkan pesan error kepada pengguna
       }

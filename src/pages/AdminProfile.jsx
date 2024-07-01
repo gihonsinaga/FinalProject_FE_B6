@@ -185,7 +185,7 @@ export default function AdminPemesanan() {
 
       setIsEditing(false);
     } catch (error) {
-      console.error("Error updating profile:", error);
+      // console.error("Error updating profile:", error);
     }
   };
 
@@ -256,7 +256,7 @@ export default function AdminPemesanan() {
         return dispatch(fetchNotifications());
       })
       .catch((error) => {
-        console.error("Error adding notification:", error);
+        // console.error("Error adding notification:", error);
         toast.error("Gagal menambahkan notifikasi");
       });
   };

@@ -209,7 +209,7 @@ export default function AdminPengguna() {
           // console.log("first", response.data.data);
         }
       } catch (error) {
-        console.error("Error fetching data", error);
+        // console.error("Error fetching data", error);
       }
     };
 
@@ -245,7 +245,7 @@ export default function AdminPengguna() {
         setIsModalOpen(true);
       }
     } catch (error) {
-      console.error("Error fetching user details", error);
+      // console.error("Error fetching user details", error);
     }
   };
 

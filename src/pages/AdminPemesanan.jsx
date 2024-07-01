@@ -143,7 +143,7 @@ export default function AdminPemesanan() {
       setOrderHistory(sortedOrders);
       // console.log("Order data:", response.data.data);
     } catch (error) {
-      console.error("Error fetching orders:", error);
+      // console.error("Error fetching orders:", error);
     }
   };
 
