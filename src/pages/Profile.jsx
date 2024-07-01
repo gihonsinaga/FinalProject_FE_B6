@@ -103,12 +103,12 @@ export default function Profile() {
       setIsEditing(false);
 
       // Show success toast
-      toast.success("Profile updated successfully!");
+      toast.success("sukses merubah profil");
     } catch (error) {
       // console.error("Error updating profile:", error);
 
       // Show error toast
-      toast.error("Failed to update profile!");
+      toast.error("gagal merubah profil");
     }
   };
 
