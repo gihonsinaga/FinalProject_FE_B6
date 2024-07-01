@@ -65,19 +65,19 @@ export default function ChangePassword() {
         if (response.status === 400) {
           toast.error(
             data.message ||
-              "Semua kolom harus diisi dan kata sandi harus sesuai dengan format yang diperlukan."
+              "Bad request due to missing fields or invalid password format"
           );
         } else if (response.status === 401) {
-          toast.error("Kata sandi lama tidak benar.");
+          toast.error("Unauthorized if the old password is incorrect.");
         } else if (response.status === 404) {
-          toast.error("Pengguna tidak ditemukan.");
+          toast.error("User not found.");
         } else {
-          toast.error(data.message || "Terjadi kesalahan.");
+          toast.error(data.message || "There is an error.");
         }
       }
     } catch (error) {
-      console.error("Kesalahan jaringan:", error);
-      toast.error("Gagal terhubung ke server.");
+      console.error("Network error:", error);
+      toast.error("Failed to connect to server.");
     }
   };
 
