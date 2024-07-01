@@ -142,31 +142,45 @@ export const authenticateUser = () => async (dispatch, getState) => {
   }
 };
 
-
-
 export const googleLogin = () => {
   window.location.href = "https://express-development-3576.up.railway.app/api/v1/users/google";
 };
 
 export const handleGoogleCallback = (navigate) => async (dispatch) => {
   try {
-    const response = await axios.get("https://express-development-3576.up.railway.app/api/v1/users/google/callback");
-    if (response.data.status === true) {
-      const { token, role, email } = response.data.data.user;
+    // Dapatkan token dari URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+
+    if (token) {
+      // Simpan token ke localStorage
+      localStorage.setItem('token', token);
+
+      console.log('token', token);
+      // Decode token untuk mendapatkan informasi user
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+
+      // Update state
       dispatch(setToken(token));
       dispatch(setIsLoggedIn(true));
-      dispatch(setUser(email));
-      dispatch(setRole(role));
+      dispatch(setUser(decodedToken.email || '')); // Asumsi email ada di token
+      dispatch(setRole(decodedToken.role || 'user')); // Asumsi role ada di token
+
       toast.success("Google login successful!");
-      if (role === "admin") {
+
+      // Redirect berdasarkan role
+      if (decodedToken.role === "admin") {
         navigate("/admin");
       } else {
         navigate("/");
       }
     } else {
-      toast.error(response.data.message || "Google login failed!");
+      toast.error("Login failed: No token provided");
+      navigate("/login");
     }
   } catch (error) {
+    console.error("Google login error:", error);
     toast.error("An error occurred during Google login!");
+    navigate("/login");
   }
 };
