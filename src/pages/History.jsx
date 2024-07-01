@@ -308,6 +308,10 @@ export default function History() {
     }
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="">
       <div className=" max-sm:h-[60px] ">
@@ -649,7 +653,7 @@ export default function History() {
                   <button
                     disabled={currentPage === 1 || isLoading}
                     onClick={() => fetchOrdersPagination(currentPage - 1)}
-                    className="sm:px-3 sm:py-1 max-sm:px-3 max-sm:py-1 bg-slate-500 text-white "
+                    className="sm:px-3 sm:py-1 max-sm:px-3 max-sm:py-1.5 bg-slate-500 text-white "
                   >
                     <span>{"<"}</span>
                   </button>
@@ -659,7 +663,7 @@ export default function History() {
                   <button
                     disabled={isLoading}
                     onClick={() => fetchOrdersPagination(currentPage + 1)}
-                    className="sm:px-3 sm:py-1 max-sm:px-3 max-sm:py-1 bg-slate-500 text-white "
+                    className="sm:px-3 sm:py-1 max-sm:px-3 max-sm:py-1.5 bg-slate-500 text-white "
                   >
                     <span>{">"}</span>
                   </button>

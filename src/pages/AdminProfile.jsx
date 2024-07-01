@@ -20,7 +20,12 @@ import {
   postNotification,
   updateNotificationStatus,
 } from "../redux/actions/notificationAction";
-import { CalendarIcon, UsersIcon } from "@heroicons/react/solid";
+import {
+  BellIcon,
+  CalendarIcon,
+  PlusIcon,
+  UsersIcon,
+} from "@heroicons/react/solid";
 import {
   UserCircleIcon,
   HomeIcon,
@@ -52,12 +57,7 @@ export default function AdminPemesanan() {
       icon: UsersIcon,
       current: false,
     },
-    {
-      name: "Penerbangan",
-      href: "/admin/penerbangan",
-      icon: PaperAirplaneIcon,
-      current: false,
-    },
+
     {
       name: "Pemesanan",
       href: "/admin/pemesanan",
@@ -65,10 +65,22 @@ export default function AdminPemesanan() {
       current: false,
     },
     {
-      name: "Profil",
-      href: "/admin/profile",
-      icon: UserCircleIcon,
+      name: "Notifikasi",
+      href: "/admin/notifikasi",
+      icon: BellIcon,
       current: true,
+    },
+    {
+      name: "Penerbangan",
+      href: "/admin/penerbangan",
+      icon: PlusIcon,
+      current: false,
+    },
+    {
+      name: "Pesawat",
+      href: "/admin/pesawat",
+      icon: PaperAirplaneIcon,
+      current: false,
     },
   ];
 
@@ -173,7 +185,7 @@ export default function AdminPemesanan() {
 
       setIsEditing(false);
     } catch (error) {
-      console.error("Error updating profile:", error);
+      // console.error("Error updating profile:", error);
     }
   };
 
@@ -225,9 +237,140 @@ export default function AdminPemesanan() {
     return classes.filter(Boolean).join(" ");
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // const handleLogout = () => {
+  //   dispatch(logout(navigate));
+  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(postNotification({ title, message }))
+      .then(() => {
+        toast.success("Notifikasi berhasil ditambahkan");
+        setShowForm(false);
+        setTitle("");
+        setMessage("");
+        return dispatch(fetchNotifications());
+      })
+      .catch((error) => {
+        // console.error("Error adding notification:", error);
+        toast.error("Gagal menambahkan notifikasi");
+      });
+  };
+
+  const [showForm, setShowForm] = useState(false);
+  const [title, setTitle] = useState("");
+  const [message, setMessage] = useState("");
+  const notifications = useSelector(
+    (state) => state.notifications.notifications
+  );
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+  };
+
+  const sortedNotifications = [...notifications].sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
+
+  const Notification = ({
+    notificationId,
+    title,
+    message,
+    createdAt,
+    isRead,
+  }) => {
+    const dispatch = useDispatch();
+
+    const handleClick = () => {
+      dispatch(updateNotificationStatus(notificationId));
+    };
+
+    return (
+      <div
+        className={`bg-white border shadow-md overflow-hidden sm:rounded-md mb-2  ${
+          isRead ? "" : "border-blue-500 "
+        }`}
+        onClick={handleClick}
+      >
+        <ul role="list" className="divide-y divide-gray-200">
+          <li>
+            <a
+              href="#"
+              className={`block  ${
+                isRead ? "" : "bg-[#EFF7FF] "
+              }  hover:bg-gray-50 ${isRead ? "text-gray-500" : ""}`}
+            >
+              <div className="flex items-start px-4 py-4 sm:px-6">
+                <svg
+                  width="30"
+                  height="30"
+                  viewBox="0 0 30 30"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="flex-shrink-0 mr-4"
+                >
+                  <path
+                    d="M15 24.75C15.625 24.75 16.156 24.531 16.593 24.093C17.031 23.656 17.25 23.125 17.25 22.5H12.75C12.75 23.125 12.969 23.656 13.407 24.093C13.844 24.531 14.375 24.75 15 24.75ZM7.5 21H22.5V18H21V14.1C21 12.575 20.6065 11.181 19.8195 9.918C19.0315 8.656 17.925 7.85 16.5 7.5V5.25H13.5V7.5C12.075 7.85 10.969 8.656 10.182 9.918C9.394 11.181 9 12.575 9 14.1V18H7.5V21ZM15 30C12.925 30 10.975 29.606 9.15 28.818C7.325 28.031 5.7375 26.9625 4.3875 25.6125C3.0375 24.2625 1.969 22.675 1.182 20.85C0.394 19.025 0 17.075 0 15C0 12.925 0.394 10.975 1.182 9.15C1.969 7.325 3.0375 5.7375 4.3875 4.3875C5.7375 3.0375 7.325 1.9685 9.15 1.1805C10.975 0.3935 12.925 0 15 0C17.075 0 19.025 0.3935 20.85 1.1805C22.675 1.9685 24.2625 3.0375 25.6125 4.3875C26.9625 5.7375 28.031 7.325 28.818 9.15C29.606 10.975 30 12.925 30 15C30 17.075 29.606 19.025 28.818 20.85C28.031 22.675 26.9625 24.2625 25.6125 25.6125C24.2625 26.9625 22.675 28.031 20.85 28.818C19.025 29.606 17.075 30 15 30Z"
+                    fill="#535f6b"
+                  />
+                </svg>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <p className="text-md font-bold truncate">{title}</p>
+                    <div className="ml-2 flex-shrink-0 flex">
+                      <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 pr-3">
+                        <CalendarIcon
+                          className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                        <p>
+                          <time dateTime={createdAt}>
+                            {formatDate(createdAt)}
+                          </time>
+                        </p>
+                      </div>
+                      {!isRead && (
+                        <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                          New
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="mt-2 sm:flex sm:justify-between">
+                    <div className="sm:flex">
+                      <p className="flex items-center text-xs font-semibold text-gray-500">
+                        {message}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="sm:flex">
+                    <p className="flex items-center text-xs text-gray-500 pt-1 truncate">
+                      {message}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    );
+  };
+
   return (
     <div>
-      <Toaster position="top-right" />
+      <div>
+        <Toaster position="bottom-right" />
+      </div>
       <>
         <div>
           <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -344,32 +487,43 @@ export default function AdminPemesanan() {
           {/* Static sidebar for desktop */}
           <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
             {/* Sidebar component, swap this element with another sidebar if you like */}
-            <div className="flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white">
+            <div className="flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-slate-200">
               <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-                <div className="flex items-center flex-shrink-0 px-5">
-                  <img
-                    src="/assets/FlyNow.png"
-                    className="h-7"
-                    alt="FlyNow Logo"
-                  />
+                <div className="flex items-center flex-shrink-0 pl-4">
+                  <div className="mr-3">
+                    <img
+                      src="/assets/LogoFlyNow.svg"
+                      className="h-7"
+                      alt="FlyNow Logo"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      src="/assets/FlyNow.svg"
+                      className="h-7 mt-2"
+                      alt="FlyNow Logo"
+                    />
+                  </div>
                 </div>
-                <nav className="mt-5 flex-1 px-2 bg-white space-y-1">
+                <div className="border-slate-300 border-b-2 mt-5  mx-4 "></div>
+
+                <nav className="mt-3 flex-1 px-2 bg-slate-200 space-y-1">
                   {navigation.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
                       className={classNames(
                         item.current
-                          ? "bg-gray-100 text-gray-900"
-                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                          ? "bg-slate-200 text-slate-900 "
+                          : "text-slate-500 hover:bg-slate-300 hover:text-gray-900",
                         "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                       )}
                     >
                       <item.icon
                         className={classNames(
                           item.current
-                            ? "text-gray-500"
-                            : "text-gray-400 group-hover:text-gray-500",
+                            ? "text-slate-900"
+                            : "text-slate-400 group-hover:text-gray-500",
                           "mr-3 flex-shrink-0 h-6 w-6"
                         )}
                         aria-hidden="true"
@@ -380,33 +534,19 @@ export default function AdminPemesanan() {
                 </nav>
               </div>
               <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
-                <a href="#" className="flex-shrink-0 w-full group block">
-                  <div className="flex items-center">
-                    <div>
-                      <img
-                        className="inline-block h-9 w-9 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
-                    </div>
-                    <div className="ml-3">
-                      <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                        Admin
-                      </p>
-                      <a
-                        href="/admin/profile"
-                        className="text-xs font-medium text-gray-500 group-hover:text-gray-700"
-                      >
-                        View profile
-                      </a>
-                    </div>
-                  </div>
-                </a>
+                <div>
+                  <button
+                    onClick={handleLogout}
+                    className="flex py-2 px-5 mr-3 font-normal text-sm text-white border-white bg-slate-600 rounded-md"
+                  >
+                    Logout
+                  </button>
+                </div>
               </div>
             </div>
           </div>
           <div className="md:pl-64 flex flex-col flex-1">
-            <div className="sticky top-0 z-10 md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3 bg-white">
+            {/* <div className="sticky top-0 z-10 md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3 bg-white">
               <button
                 type="button"
                 className="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
@@ -425,8 +565,7 @@ export default function AdminPemesanan() {
                 </div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                   <div className="flex flex-col mx-auto ">
-                    {/* stats */}
-
+                  
                     <div className="">
                       <main>
                         <div className="mx-auto px-4 py-7">
@@ -579,11 +718,76 @@ export default function AdminPemesanan() {
                     </div>
                   </div>
 
-                  {/* /End replace */}
+                
                 </div>
               </div>
-            </main>
-            <Footer />
+            </main> */}
+
+            {/* notifications */}
+
+            <div className="border rounded-md shadow-md mt-5 p-5 px-10">
+              <div className="flex flex-row justify-between items-center mb-3 mt-3">
+                <h2 className="text-4xl  text-slate-700 font-medium ml-7">
+                  Notifikasi
+                </h2>
+                <button
+                  className="bg-slate-500 hover:bg-slate-600 text-white font-small py-2 px-3 rounded"
+                  onClick={() => setShowForm(true)}
+                >
+                  Tambah Notifikasi
+                </button>
+              </div>
+
+              {showForm && (
+                <div className="fixed inset-0 z-20 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
+                  <div className="bg-white p-5 rounded-lg">
+                    <h2 className="text-xl mb-4">Tambah Notifikasi</h2>
+                    <form onSubmit={handleSubmit}>
+                      <input
+                        type="text"
+                        placeholder="Judul"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        className="w-full p-2 mb-4 border rounded"
+                      />
+                      <textarea
+                        placeholder="Pesan"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        className="w-full p-2 mb-4 border rounded"
+                      />
+                      <div className="flex justify-end">
+                        <button
+                          type="button"
+                          onClick={() => setShowForm(false)}
+                          className="mr-2 px-4 py-2 bg-gray-300 rounded"
+                        >
+                          Batal
+                        </button>
+                        <button
+                          type="submit"
+                          className="px-4 py-2 bg-blue-500 text-white rounded"
+                        >
+                          Kirim
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              )}
+              <div className="overflow-y-auto h-[700px] my-8">
+                {sortedNotifications.map((notification) => (
+                  <Notification
+                    key={notification.id}
+                    notificationId={notification.id}
+                    title={notification.title}
+                    message={notification.message}
+                    createdAt={notification.createdAt}
+                    isRead={notification.isRead}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </>

@@ -57,6 +57,10 @@ export default function Plane() {
     setVisiblePlanes((prevVisible) => prevVisible + 9);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-100">
       <div className=" max-sm:h-[60px] ">

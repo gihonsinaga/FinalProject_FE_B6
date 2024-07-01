@@ -122,7 +122,7 @@ export default function Search3() {
         toast.success("Search Berhasil");
         setTimeout(() => {
           navigate("/SearchResult", { state: dataSearch });
-        }, 2000);
+        }, 50);
       })
       .catch((error) => {
         // console.log("error", error);

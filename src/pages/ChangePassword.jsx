@@ -81,6 +81,10 @@ export default function ChangePassword() {
     }
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="text-xs">
@@ -118,13 +122,13 @@ export default function ChangePassword() {
                       <img
                         className="relative h-full w-full object-cover blur-lg mb-14"
                         src={user?.data?.avatar_url}
-                        alt="Profile"
+                        // alt="Profile"
                       />
                       <div className="absolute inset-0 flex justify-center items-center">
                         <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden border-4 border-white shadow-md mt-16 sm:mt-32">
                           <img
                             src={user?.data?.avatar_url}
-                            alt="Profile"
+                            // alt="Profile"
                             className="h-full w-full object-cover"
                           />
                         </div>

@@ -9,7 +9,10 @@ export default function Payment() {
   const location = useLocation();
   const navigate = useNavigate();
   // Tempat menampung data idorder dari componen Checkout
-  const idOrder = location.state;
+  const idOrder = location.state.idOrder;
+  const familyName = location.state.familyName;
+  // console.log("location.state", location);
+
   useEffect(() => {
     if (!idOrder) {
       alert("Pesan dulu!");
@@ -87,6 +90,10 @@ export default function Payment() {
 
   // --------------------------------------------------------------------------
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <div className=" max-sm:h-[60px] ">
@@ -134,7 +141,7 @@ export default function Payment() {
                 Nama Keluarga
               </div>
               <div className="mt-1 p-2 border border-gray-400 rounded sm:w-[520px] h-[40px] mx-auto text-gray-500 max-sm:w-full">
-                {user?.data?.family_name}
+                {familyName ? familyName : "-"}
               </div>
               <div className="mt-5 sm:ml-5 text-slate-600 font-semibold">
                 Nomor Telepon
@@ -376,7 +383,7 @@ export default function Payment() {
                   onClick={() =>
                     navigate("/paymentOrder", { state: order?.id })
                   }
-                  className="bg-green-500 p-4 sm:w-[540px] mt-5 rounded-lg font-bold text-white"
+                  className="bg-green-500 p-4 sm:w-[full] mt-5 rounded-lg font-bold text-white"
                 >
                   Lanjut Bayar
                 </button>

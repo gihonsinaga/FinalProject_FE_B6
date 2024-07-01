@@ -91,6 +91,10 @@ export default function UpdateSandi() {
     }
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="w-full">
       <div className="flex flex-row-reverse">

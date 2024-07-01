@@ -25,9 +25,11 @@ import AdminPemesanan from "./pages/AdminPemesanan.jsx";
 import AdminPenerbangan from "./pages/AdminPenerbangan.jsx";
 import AdminPengguna from "./pages/AdminPenguna.jsx";
 import AdminProfile from "./pages/AdminProfile.jsx";
+import AdminPesawat from "./pages/AdminPesawat.jsx";
 // import React, { useEffect } from "react";
 import React, { useEffect } from "react";
 import GoogleCallback from "./component/GoogleCallback";
+import PageNotFound from "./component/PageNotFound.jsx";
 
 function App() {
   return (
@@ -53,11 +55,13 @@ function App() {
               <Route path="/admin/pemesanan" element={<AdminPemesanan />} />
               <Route path="/admin/penerbangan" element={<AdminPenerbangan />} />
               <Route path="/admin/pengguna" element={<AdminPengguna />} />
-              <Route path="/admin/profile" element={<AdminProfile />} />
+              <Route path="/admin/notifikasi" element={<AdminProfile />} />
+              <Route path="/admin/pesawat" element={<AdminPesawat />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/about-us" element={<AboutUS />} />
               <Route path="/plane" element={<Plane />} />
               <Route path="/changepassword" element={<ChangePassword />} />
+              <Route path="*" element={<PageNotFound />} />
               <Route
                 path="/google/callback"
                 element={<GoogleCallback />}
@@ -67,18 +71,6 @@ function App() {
           </BrowserRouter>
         </PersistGate>
       </Provider>
-
-      {/* <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/searchresult" element={<SearchResult />} />
-          <Route path="/Otp" element={<Otp />} />
-          <Route path="/lupasandi" element={<LupaSandi />} />
-          <Route path="/reset-password" element={<UpdateSandi />} />
-        </Routes>
-      </BrowserRouter> */}
     </div>
   );
 }

@@ -20,7 +20,12 @@ import {
   postNotification,
   updateNotificationStatus,
 } from "../redux/actions/notificationAction";
-import { CalendarIcon, UsersIcon } from "@heroicons/react/solid";
+import {
+  BellIcon,
+  CalendarIcon,
+  PlusIcon,
+  UsersIcon,
+} from "@heroicons/react/solid";
 import {
   UserCircleIcon,
   HomeIcon,
@@ -30,6 +35,7 @@ import {
   CreditCardIcon,
 } from "@heroicons/react/outline";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../redux/actions/authActions";
 
 export default function AdminPengguna() {
   const navigate = useNavigate();
@@ -55,12 +61,7 @@ export default function AdminPengguna() {
       icon: UsersIcon,
       current: true,
     },
-    {
-      name: "Penerbangan",
-      href: "/admin/penerbangan",
-      icon: PaperAirplaneIcon,
-      current: false,
-    },
+
     {
       name: "Pemesanan",
       href: "/admin/pemesanan",
@@ -68,9 +69,21 @@ export default function AdminPengguna() {
       current: false,
     },
     {
-      name: "Profil",
-      href: "/admin/profile",
-      icon: UserCircleIcon,
+      name: "Notifikasi",
+      href: "/admin/notifikasi",
+      icon: BellIcon,
+      current: false,
+    },
+    {
+      name: "Penerbangan",
+      href: "/admin/penerbangan",
+      icon: PlusIcon,
+      current: false,
+    },
+    {
+      name: "Pesawat",
+      href: "/admin/pesawat",
+      icon: PaperAirplaneIcon,
       current: false,
     },
   ];
@@ -171,7 +184,7 @@ export default function AdminPengguna() {
 
           <button
             onClick={onClose}
-            className="mt-6 bg-blue-500 text-white flex px-4 py-2 rounded hover:bg-blue-600"
+            className="mt-6 bg-slate-600 text-white flex px-4 py-2 rounded hover:bg-slate-700"
           >
             Close
           </button>
@@ -196,7 +209,7 @@ export default function AdminPengguna() {
           // console.log("first", response.data.data);
         }
       } catch (error) {
-        console.error("Error fetching data", error);
+        // console.error("Error fetching data", error);
       }
     };
 
@@ -232,7 +245,7 @@ export default function AdminPengguna() {
         setIsModalOpen(true);
       }
     } catch (error) {
-      console.error("Error fetching user details", error);
+      // console.error("Error fetching user details", error);
     }
   };
 
@@ -248,7 +261,7 @@ export default function AdminPengguna() {
             data: null,
             title: "Aksi",
             render: function (data, type, row) {
-              return `<button class="detail-button bg-blue-400 hover:bg-blue-500 text-white font-regular py-2 px-4 rounded" data-id="${row.id}">Detail</button>`;
+              return `<button class="detail-button bg-slate-500 hover:bg-slate-600 text-white font-regular py-2 px-4 rounded" data-id="${row.id}">Detail</button>`;
             },
           },
         ],
@@ -320,9 +333,19 @@ export default function AdminPengguna() {
     return classes.filter(Boolean).join(" ");
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleLogout = () => {
+    dispatch(logout(navigate));
+  };
+
   return (
     <div>
-      <Toaster position="top-right" />
+      <div>
+        <Toaster position="bottom-right" />
+      </div>
       <>
         <div>
           <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -439,32 +462,43 @@ export default function AdminPengguna() {
           {/* Static sidebar for desktop */}
           <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
             {/* Sidebar component, swap this element with another sidebar if you like */}
-            <div className="flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white">
+            <div className="flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-slate-200">
               <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-                <div className="flex items-center flex-shrink-0 px-5">
-                  <img
-                    src="/assets/FlyNow.png"
-                    className="h-7"
-                    alt="FlyNow Logo"
-                  />
+                <div className="flex items-center flex-shrink-0 pl-4">
+                  <div className="mr-3">
+                    <img
+                      src="/assets/LogoFlyNow.svg"
+                      className="h-7"
+                      alt="FlyNow Logo"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      src="/assets/FlyNow.svg"
+                      className="h-7 mt-2"
+                      alt="FlyNow Logo"
+                    />
+                  </div>
                 </div>
-                <nav className="mt-5 flex-1 px-2 bg-white space-y-1">
+                <div className="border-slate-300 border-b-2 mt-5  mx-4 "></div>
+
+                <nav className="mt-3 flex-1 px-2 bg-slate-200 space-y-1">
                   {navigation.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
                       className={classNames(
                         item.current
-                          ? "bg-gray-100 text-gray-900"
-                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                          ? "bg-slate-200 text-slate-900 "
+                          : "text-slate-500 hover:bg-slate-300 hover:text-gray-900",
                         "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                       )}
                     >
                       <item.icon
                         className={classNames(
                           item.current
-                            ? "text-gray-500"
-                            : "text-gray-400 group-hover:text-gray-500",
+                            ? "text-slate-900"
+                            : "text-slate-400 group-hover:text-gray-500",
                           "mr-3 flex-shrink-0 h-6 w-6"
                         )}
                         aria-hidden="true"
@@ -475,28 +509,14 @@ export default function AdminPengguna() {
                 </nav>
               </div>
               <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
-                <a href="#" className="flex-shrink-0 w-full group block">
-                  <div className="flex items-center">
-                    <div>
-                      <img
-                        className="inline-block h-9 w-9 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
-                    </div>
-                    <div className="ml-3">
-                      <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                        Admin
-                      </p>
-                      <a
-                        href="/admin/profile"
-                        className="text-xs font-medium text-gray-500 group-hover:text-gray-700"
-                      >
-                        View profile
-                      </a>
-                    </div>
-                  </div>
-                </a>
+                <div>
+                  <button
+                    onClick={handleLogout}
+                    className="flex py-2 px-5 mr-3 font-normal text-sm text-white border-white bg-slate-600 rounded-md"
+                  >
+                    Logout
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -513,12 +533,12 @@ export default function AdminPengguna() {
             </div>
             <main className="flex-1">
               <div className="py-6">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-                  <h1 className="text-2xl font-semibold text-gray-900">
+                <div className="max-w-7xl mx-auto px-4  ">
+                  <h1 className="text-4xl  text-slate-700 font-medium ml-7">
                     Pengguna
                   </h1>
                 </div>
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
                   <div className="flex flex-col mx-auto ">
                     {/* datatables */}
                     <div className="container mx-auto px-4 sm:px-0 max-w-full  border rounded-md shadow-m mt-5">

@@ -107,6 +107,10 @@ export default function Otp() {
     }`;
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="w-full">
       <Toaster position="top-right" reverseOrder={false} />

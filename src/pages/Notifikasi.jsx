@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   updateSearchQuery,
   updateFilterValue,
-  fetchNotificationsPage,
 } from "../redux/actions/notificationAction";
 import {
   fetchNotifications,
@@ -35,9 +34,24 @@ export default function Notifikasi() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
   const notifications = useSelector(
     (state) => state.notifications.notifications
   );
+  // console.log("notifications", notifications);
+  const totalPages = useSelector((state) => state.notifications.totalPages);
+
+  const notificationsArray = Array.isArray(notifications) ? notifications : [];
+
+  // Urutkan notifikasi berdasarkan createdAt, dari yang terbaru ke yang terlama
+  const sortedNotifications = [...notificationsArray].sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
+  //--------------
+
+  // const notifications = useSelector(
+  //   (state) => state.notifications.notifications
+  // );
 
   const searchQuery = useSelector((state) => state.notifications.searchQuery);
   const filterValue = useSelector((state) => state.notifications.filterValue);
@@ -59,9 +73,9 @@ export default function Notifikasi() {
     dispatch(fetchNotifications());
   }, [dispatch]);
 
-  const sortedNotifications = [...notifications].sort(
-    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-  );
+  // const sortedNotifications = [...notifications].sort(
+  //   (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+  // );
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -90,6 +104,10 @@ export default function Notifikasi() {
     const handleClick = () => {
       dispatch(updateNotificationStatus(notificationId));
     };
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
 
     return (
       <div
@@ -184,19 +202,29 @@ export default function Notifikasi() {
   // };
 
   const [currentPage, setCurrentPage] = useState(1);
-  // console.log("currentPage", currentPage);
   const [isLoading, setIsLoading] = useState(false);
+  // const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     dispatch(fetchNotifications(currentPage));
-  }, [currentPage, dispatch]);
+  }, [currentPage, dispatch, searchQuery, filterValue]);
+
+  // const handlePageChange = (newPage) => {
+  //   setCurrentPage(newPage);
+  //   setIsLoading(true);
+  //   dispatch(fetchNotificationsPage(newPage))
+  //     .then(() => setIsLoading(false))
+  //     .catch(() => setIsLoading(false));
+  // };
 
   const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-    setIsLoading(true);
-    dispatch(fetchNotificationsPage(newPage))
-      .then(() => setIsLoading(false))
-      .catch(() => setIsLoading(false));
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+      setIsLoading(true);
+      dispatch(fetchNotifications(newPage))
+        .then(() => setIsLoading(false))
+        .catch(() => setIsLoading(false));
+    }
   };
 
   return (
@@ -312,20 +340,64 @@ export default function Notifikasi() {
             </div>
           </div>
 
-          <div className=" sm:mt-5 text-sm max-sm:px-5 max-sm:-mt-2">
-            {sortedNotifications.map((notification) => (
-              <Notification
-                key={notification.id}
-                notificationId={notification.id}
-                title={notification.title}
-                message={notification.message}
-                createdAt={notification.createdAt}
-                isRead={notification.isRead}
-              />
-            ))}
+          <div className="sm:mt-5 text-sm max-sm:px-5 max-sm:-mt-2">
+            {sortedNotifications.length > 0 ? (
+              sortedNotifications.map((notification) => (
+                <Notification
+                  key={notification.id}
+                  notificationId={notification.id}
+                  title={notification.title}
+                  message={notification.message}
+                  createdAt={notification.createdAt}
+                  isRead={notification.isRead}
+                />
+              ))
+            ) : (
+              <p>No notifications found.</p>
+            )}
           </div>
           {/* Pagination */}
           <div className="max-sm:flex max-sm:justify-end">
+            <div className="flex justify-end items-center sm:mt-10 max-sm:mr-5 max-sm:mt-2 max-sm:mb-20 ">
+              <button
+                disabled={currentPage === 1 || isLoading}
+                onClick={() => handlePageChange(currentPage - 1)}
+                className="sm:px-3 sm:py-1 max-sm:px-3 max-sm:py-1 bg-slate-500 text-white disabled:opacity-50"
+              >
+                <span>{"<"}</span>
+              </button>
+              <span className="sm:mx-4 max-sm:mx-3 font-medium max-sm:text-xs sm:text-xs">
+                {currentPage} of {totalPages}
+              </span>
+              <button
+                disabled={currentPage === totalPages || isLoading}
+                onClick={() => handlePageChange(currentPage + 1)}
+                className="sm:px-3 sm:py-1 max-sm:px-3 max-sm:py-1 bg-slate-500 text-white disabled:opacity-50"
+              >
+                <span>{">"}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="">
+        <div className="sm:mt-20  max-sm:hidden">
+          <Footer />
+        </div>
+        <div className="sm:hidden">
+          <BottomNav />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+{
+  /* Pagination */
+}
+{
+  /* <div className="max-sm:flex max-sm:justify-end">
             <div className="flex justify-end items-center sm:mt-10 max-sm:mr-5 max-sm:mt-2 max-sm:mb-20 ">
               <button
                 disabled={currentPage === 1 || isLoading}
@@ -345,18 +417,5 @@ export default function Notifikasi() {
                 <span>{">"}</span>
               </button>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="">
-        <div className="sm:mt-20  max-sm:hidden">
-          <Footer />
-        </div>
-        <div className="sm:hidden">
-          <BottomNav />
-        </div>
-      </div>
-    </div>
-  );
+          </div> */
 }
