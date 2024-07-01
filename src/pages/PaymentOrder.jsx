@@ -222,6 +222,10 @@ export default function PaymentOrder() {
 
   // --------------------------------------------------------------------------
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="">
       <div className="text-xs">

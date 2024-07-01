@@ -22,6 +22,9 @@ import Modal from "react-responsive-modal";
 import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   // -----------------------------------------------------------------------------------------
 
   const formRef = useRef(null);
@@ -60,6 +63,7 @@ export default function HomePage() {
   }, []);
 
   const [recomendation, setRecomendation] = useState([]);
+  // console.log("recomendation", recomendation);
 
   useEffect(() => {
     const getCategoryFilter = async () => {
@@ -94,15 +98,15 @@ export default function HomePage() {
     return `IDR ${price.toLocaleString("id-ID")}`;
   };
 
-  const getRandomImage = () => {
-    const images = [
-      "assets/recomend2.svg",
-      "assets/recomend3.svg",
-      "assets/recomend5.svg",
-      "assets/recomend6.svg",
-    ];
-    return images[Math.floor(Math.random() * images.length)];
-  };
+  // const getRandomImage = () => {
+  //   const images = [
+  //     "assets/recomend2.svg",
+  //     "assets/recomend3.svg",
+  //     "assets/recomend5.svg",
+  //     "assets/recomend6.svg",
+  //   ];
+  //   return images[Math.floor(Math.random() * images.length)];
+  // };
 
   // ---------------------------------------------------------------------------------------
   const [openPassengerModal, setOpenPassengerModal] = useState(false);
@@ -261,7 +265,7 @@ export default function HomePage() {
                 idCategory === button?.id
                   ? "bg-slate-500 text-white"
                   : "bg-slate-200 text-black"
-              } rounded-2xl max-sm:py-3 sm:py-3 sm:px-6 font-normal tracking-wide sm:text-xs max-sm:text-xs mr-4 max-sm:px-10`}
+              } rounded-2xl max-sm:py-3 sm:py-3 sm:px-5 font-normal tracking-wide sm:text-xs max-sm:text-xs mr-4 max-sm:px-10`}
             >
               <img
                 src="/assets/fi_search.png"
@@ -336,14 +340,14 @@ export default function HomePage() {
                 <div
                   key={i}
                   onClick={() => handleRecommendationClick(e)}
-                  className="max-sm:w-[48%] bg-slate-100 max-sm:h-[200px] max-sm:border max-sm:shadow-md max-sm:rounded-lg max-sm:overflow-hidden  sm:w-[full]  sm:h-[290px]  max-sm:mb-5 max-sm:justify-center max-sm:flex  border-2  shadow-xl cursor-pointer rounded-lg transition duration-300 ease-in-out transform hover:scale-105 "
+                  className="max-sm:w-[48%] bg-slate-100 max-sm:h-[200px] max-sm:border max-sm:shadow-md max-sm:rounded-lg max-sm:overflow-hidden  sm:w-[full]  sm:h-[270px]  max-sm:mb-5 max-sm:justify-center max-sm:flex  border-2  shadow-xl cursor-pointer rounded-lg transition duration-300 ease-in-out transform hover:scale-105 "
                 >
                   <div className="sm:mx-3 ">
                     <div>
                       <img
-                        src={getRandomImage()}
+                        src={e?.image_url}
                         alt=""
-                        className="sm:w-[250px] sm:h-[200px] max-sm:w-[200px] max-sm:object-cover"
+                        className="sm:w-[250px] sm:h-[150px] sm:my-3 rounded-lg max-sm:w-[200px] max-sm:object-cover"
                       />
                     </div>
                     <div className="sm:text-xs font-medium max-sm:text-[10px] max-sm:mt-2 max-sm:mx-2">

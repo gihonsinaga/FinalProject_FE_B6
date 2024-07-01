@@ -509,6 +509,11 @@ export default function SearchResult() {
     setDropdownIsOpen(!dropdownIsOpen);
   };
 
+  //------------------------------------------------------------------------
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className=" max-sm:text-sm">
       <div className="text-xs">
@@ -809,7 +814,7 @@ export default function SearchResult() {
           <div className="border-gray-300 border-b-2 my-3 sm:hidden mx-32 max-sm:mt-2 max-sm:mb-5 "></div>
 
           {/* list tiket */}
-          <div className="text-center overflow-y-scroll sm:h-[450px] max-sm:h-[380px] max-sm:text-xs">
+          <div className="text-center sm:overflow-y-scroll sm:h-[450px] max-sm:h-[full] max-sm:text-xs">
             {/* booking tiket 1 */}
             {isEmpty ? (
               <div className="flex flex-col mt-10 sm:px-60">
@@ -819,7 +824,7 @@ export default function SearchResult() {
                   className="sm:h-[250px] sm:w-[300px]"
                 />
                 <h2 className="sm:text-base font-semibold mt-4 max-sm:text-sm max-sm:text-center">
-                  Maaf, Tiket Anda tidak ditemukan
+                  Maaf, Tiket Anda Sudah Habis
                 </h2>
                 <div
                   onClick={() => navigate("/")}
@@ -973,11 +978,11 @@ export default function SearchResult() {
           </div>
         </div>
 
-        <div className="border-gray-300 border-b-2 mb-1 sm:mt-14 px-40 max-sm:mt-3"></div>
+        {/* <div className="border-gray-300 border-b-2 mb-1 sm:mt-14 px-40 max-sm:mt-3"></div> */}
 
         {/* Pagination */}
 
-        <div className="max-sm:flex max-sm:justify-end">
+        <div className="max-sm:flex max-sm:justify-end max-sm:mt-5 max-sm:mb-5">
           <div className="flex justify-end items-center sm:mt-5 max-sm:mr-5 max-sm:mt-2 max-sm:mb-5 ">
             <button
               disabled={currentPage === 1 || isLoading}
@@ -1001,9 +1006,9 @@ export default function SearchResult() {
       </div>
 
       {/* filter mobile */}
-      <div className="sm:hidden text-xs mb-12 relative">
+      <div className="sm:hidden text-xs mb-10 relative">
         <div
-          className="flex bg-white text-slate-600 border cursor-pointer border-slate-500 px-4 h-[40px] items-center w-full"
+          className="flex bg-white text-slate-600 border-t cursor-pointer border-slate-500 px-4 h-[40px] items-center w-full"
           onClick={toggleDropdown}
         >
           <div className="mx-auto flex">

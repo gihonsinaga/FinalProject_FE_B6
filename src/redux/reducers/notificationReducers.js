@@ -4,6 +4,7 @@ const initialState = {
   notifications: [],
   searchQuery: "",
   filterValue: "",
+  totalPages: 1,
 };
 
 const notificationSlice = createSlice({
@@ -30,6 +31,9 @@ const notificationSlice = createSlice({
     setFilterValue: (state, action) => {
       state.filterValue = action.payload;
     },
+    setTotalPages: (state, action) => {
+      state.totalPages = action.payload;
+    },
   },
 });
 
@@ -39,5 +43,6 @@ export const {
   markAsRead,
   setSearchQuery,
   setFilterValue,
+  setTotalPages,
 } = notificationSlice.actions;
 export default notificationSlice.reducer;

@@ -68,6 +68,17 @@ export default function Checkout() {
   // console.log("location.state", location.state);
   // console.log("flightDetaiIDd", flightDetailId);
 
+  const [isInputVisible, setIsInputVisible] = useState(false);
+  const [familyName, setFamilyName] = useState("");
+
+  const handleToggle = () => {
+    setIsInputVisible(!isInputVisible);
+  };
+
+  const handleInputFamilyName = (e) => {
+    setFamilyName(e.target.value);
+  };
+
   const orderTicket = async (data) => {
     try {
       const response = await axios.post(
@@ -85,7 +96,9 @@ export default function Checkout() {
 
       toast.success("Data Berhasil Tersimpan");
       setTimeout(() => {
-        navigate("/payment", { state: idOrder });
+        navigate("/payment", {
+          state: { idOrder: idOrder, familyName: familyName },
+        });
       }, 2000);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -113,10 +126,10 @@ export default function Checkout() {
         family_name: passenger.familyName,
         birth_date: passenger.birthDate,
         nationality: passenger.nationality,
-        identity_type: "null",
-        identity_number: "null",
+        identity_type: "-",
+        identity_number: "-",
         expired_date: "2030-01-01",
-        issuing_country: "null",
+        issuing_country: "-",
       })),
       ...babyPassengers.map((passenger) => ({
         title: passenger.title,
@@ -124,15 +137,15 @@ export default function Checkout() {
         family_name: passenger.familyName,
         birth_date: passenger.birthDate,
         nationality: passenger.nationality,
-        identity_type: "null",
-        identity_number: "null",
+        identity_type: "-",
+        identity_number: "-",
         expired_date: "2030-01-01",
-        issuing_country: "null",
+        issuing_country: "-",
       })),
     ];
 
     const data = { passengers: allPassengers };
-    // console.log("All Passengers:", data);
+
     orderTicket(data);
   };
 
@@ -365,6 +378,9 @@ export default function Checkout() {
   }, [navigate]);
 
   //---------------------------------------------------------------------------------------
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>
@@ -423,11 +439,26 @@ export default function Checkout() {
               <div className="mt-1 p-2 border border-gray-400 rounded sm:w-[520px] h-[40px] mx-auto text-gray-500 max-sm:w-full">
                 {user?.data?.fullname}
               </div>
-              <div className="mt-5 sm:ml-5 text-slate-600 font-semibold ">
-                Nama Keluarga
-              </div>
-              <div className="mt-1 p-2 border border-gray-400 rounded sm:w-[520px] h-[40px] mx-auto text-gray-500 max-sm:w-full">
-                {user?.data?.family_name}
+              <div className="mt-5 sm:ml-5 text-slate-600 font-semibold">
+                Punya Nama Keluarga ?
+                <button
+                  onClick={handleToggle}
+                  className="ml-3 px-5 py-1 bg-slate-500 text-white rounded-full text-xs"
+                  disabled={!isLogin}
+                >
+                  {isInputVisible ? "tidak" : "ya"}
+                </button>
+                {isInputVisible && (
+                  <div className="mt-1  border border-gray-400 rounded sm:w-[520px] h-[40px] mx-auto text-gray-500 max-sm:w-full sm:-ml-0.5">
+                    <input
+                      type="text"
+                      value={familyName}
+                      onChange={handleInputFamilyName}
+                      className="w-full h-full font-medium pl-2 "
+                      placeholder="Masukkan Nama Keluarga"
+                    />
+                  </div>
+                )}
               </div>
               <div className="mt-5 sm:ml-5 text-slate-600 font-semibold">
                 Nomor Telepon

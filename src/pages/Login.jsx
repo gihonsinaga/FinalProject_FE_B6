@@ -46,6 +46,10 @@ export default function Login() {
     dispatch(googleLogin(navigate));
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="w-full">
       <div className="text-xs">
@@ -106,7 +110,7 @@ export default function Login() {
                 <p className="">Belum punya akun?</p>
                 <Link
                   to="/register"
-                  className="pl-1 font-bold text-blue-500 hover:underline max-sm:mr-16"
+                  className="pl-1 font-bold text-blue-500 hover:underline max-sm:mr-20"
                 >
                   Daftar disini
                 </Link>
@@ -118,7 +122,9 @@ export default function Login() {
               className="flex flex-row shadow w-full h-[40px] self-center mt-3 bg-slate-200 hover:bg-slate-300 focus:shadow-outline focus:outline-none text-black py-2 px-4 rounded-lg justify-center"
             >
               <FcGoogle className="mr-2 mt-1" />
-              <span className="mt-1 max-sm:text-xs">Masuk dengan Google </span>
+              <span className="mt-1 max-sm:text-xs sm:text-sm">
+                Masuk dengan Google{" "}
+              </span>
             </button>
           </div>
           <div>{/* Additional content */}</div>

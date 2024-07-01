@@ -6,7 +6,7 @@ import {
 } from "../reducers/ticketReducers";
 
 export const DetailTicket = (props) => async (dispatch) => {
-  console.log("dispatch id", props);
+  // console.log("dispatch id", props);
 
   try {
     const response = await axios.get(
@@ -17,13 +17,13 @@ export const DetailTicket = (props) => async (dispatch) => {
       }
     );
 
-    console.log("api detail flight", response.data.data);
+    // console.log("api detail flight", response.data.data);
     dispatch(setDetailTicket(response.data.data));
     dispatch(setId(props.id));
     dispatch(setAllPassenger(props.passenger2));
 
     return;
   } catch (error) {
-    console.error("Error fetching data", error);
+    // console.error("Error fetching data", error);
   }
 };

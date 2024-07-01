@@ -43,6 +43,10 @@ export default function Register() {
     dispatch(register(data, navigate));
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="w-full">
       <div className="text-xs">
@@ -120,7 +124,7 @@ export default function Register() {
                 <p className="">Sudah punya akun?</p>
                 <Link
                   to="/login"
-                  className="pl-1 font-bold text-blue-500 hover:underline max-sm:mr-14"
+                  className="pl-1 font-bold text-blue-500 hover:underline max-sm:mr-20"
                 >
                   Masuk disini
                 </Link>
@@ -129,7 +133,9 @@ export default function Register() {
             <div className="border bt-2"></div>
             <button className="flex flex-row shadow w-full h-[40px] self-center mt-3 bg-slate-200 hover:bg-slate-300 focus:shadow-outline focus:outline-none text-black py-2 sm:px-4 max-sm:px-10 rounded-lg justify-center sm:text-sm max-sm:text-xs">
               <FcGoogle className="mr-2 mt-1" />
-              <span className="mt-1 max-sm:text-xs">Masuk dengan Google </span>
+              <span className="mt-1 max-sm:text-xs sm:text-sm">
+                Masuk dengan Google{" "}
+              </span>
             </button>
           </div>
           <div>{/* Additional content */}</div>

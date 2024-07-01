@@ -22,13 +22,13 @@ export const login = (data, navigate, redirectTo) => async (dispatch) => {
     const response = await axios.request(config);
     if (response.data.status === true) {
       const { token, email } = response.data.data;
-      console.log("response", response.data.data);
+      // console.log("response", response.data.data);
       dispatch(setToken(token));
       dispatch(setIsLoggedIn(true));
       dispatch(setUser(email));
       toast.success("Login successful!");
       const role = response.data.data.role;
-      console.log("role", role);
+      // console.log("role", role);
       dispatch(setRole(role));
       setTimeout(() => {
         {
@@ -82,7 +82,7 @@ export const register = (data, navigate) => async (dispatch) => {
       } else {
         toast.error("An error occurred during register!");
       }
-      console.log("error.response.data.message", error.response.data.message);
+      // console.log("error.response.data.message", error.response.data.message);
       return;
     }
     toast.error("An error occurred during register!");
@@ -103,7 +103,7 @@ export const logout = (navigate) => async (dispatch) => {
     // toast.success("Logged out successfully!");
     navigate("/");
   } catch (error) {
-    console.error("Logout error:", error);
+    // console.error("Logout error:", error);
     toast.error("An error occurred during logout!");
   }
 };
@@ -127,7 +127,7 @@ export const authenticateUser = () => async (dispatch, getState) => {
       // console.log('token', token)
     }
   } catch (error) {
-    console.error("Authentication error:", error);
+    // console.error("Authentication error:", error);
     if (error.response && error.response.status === 401) {
       // Token tidak valid atau kadaluarsa
       dispatch(setToken(null));
@@ -142,15 +142,16 @@ export const authenticateUser = () => async (dispatch, getState) => {
   }
 };
 
-
-
 export const googleLogin = () => {
-  window.location.href = "https://express-development-3576.up.railway.app/api/v1/users/google";
+  window.location.href =
+    "https://express-development-3576.up.railway.app/api/v1/users/google";
 };
 
 export const handleGoogleCallback = (navigate) => async (dispatch) => {
   try {
-    const response = await axios.get("https://express-development-3576.up.railway.app/api/v1/users/google/callback");
+    const response = await axios.get(
+      "https://express-development-3576.up.railway.app/api/v1/users/google/callback"
+    );
     if (response.data.status === true) {
       const { token, role, email } = response.data.data.user;
       dispatch(setToken(token));

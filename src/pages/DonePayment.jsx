@@ -27,6 +27,10 @@ export default function DonePayment() {
   }, []);
   // console.log("dataPayment", dataPayment);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <div className=" max-sm:h-[60px] ">

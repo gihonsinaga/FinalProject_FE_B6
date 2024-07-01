@@ -80,17 +80,18 @@ export default function AdminPage() {
       name: "Penerbangan",
       href: "/admin/penerbangan",
       icon: PlusIcon,
-      current: true,
+      current: false,
     },
     {
       name: "Pesawat",
       href: "/admin/pesawat",
       icon: PaperAirplaneIcon,
-      current: false,
+      current: true,
     },
   ];
 
   const [planes, setPlanes] = useState([]);
+  //   console.log("planes", planes);
   const token = useSelector((state) => state.auth.token);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [cities, setCities] = useState([]);
@@ -124,6 +125,20 @@ export default function AdminPage() {
 
     fetchPlanes();
   }, []);
+
+  const getUniquePlanes = (planes) => {
+    const uniquePlanes = [];
+    const seenNames = new Set();
+
+    for (const plane of planes) {
+      if (!seenNames.has(plane.name)) {
+        seenNames.add(plane.name);
+        uniquePlanes.push(plane);
+      }
+    }
+
+    return uniquePlanes;
+  };
 
   useEffect(() => {
     const userCount = async () => {
@@ -223,12 +238,32 @@ export default function AdminPage() {
     fetchContinents();
   }, []);
 
+  const UniqueCityList = ({ planes }) => {
+    const uniqueCities = [];
+    const cityNamesSet = new Set();
+
+    planes?.forEach((plane) => {
+      if (!cityNamesSet.has(plane.name)) {
+        cityNamesSet.add(plane.name);
+        uniqueCities.push(plane);
+      }
+    });
+    return (
+      <div>
+        {uniqueCities.map((plane, index) => (
+          <CityCard key={index} cityName={plane.name} />
+        ))}
+      </div>
+    );
+  };
+
   const uniquePlanes = new Set(planes.map((plane) => plane.name));
+  console.log("uniquePlanes", uniquePlanes);
   const totalUniquePlanes = uniquePlanes.size;
   const stats = [
     {
-      name: "Total Penerbangan",
-      stat: userData.countFlight,
+      name: "Total Pesawat",
+      stat: totalUniquePlanes,
     },
     {
       name: "Total Kota",
@@ -391,7 +426,6 @@ export default function AdminPage() {
       }
     }
   };
-
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -399,6 +433,71 @@ export default function AdminPage() {
   };
 
   //- ----------------------------------------------------------------
+  const [name, setName] = useState("");
+  const [series, setSeries] = useState("");
+  const [airlineId, setAirlineId] = useState(1);
+  const [capacity, setCapacity] = useState(100);
+  const [detailPlane, setDetailPlane] = useState([
+    {
+      seat_class_id: 1,
+      total_seat: 40,
+    },
+  ]);
+
+  const handleDetailChange = (index, field, value) => {
+    const newDetailPlane = [...detailPlane];
+    newDetailPlane[index][field] = value;
+    setDetailPlane(newDetailPlane);
+  };
+
+  const addDetailPlane = () => {
+    setDetailPlane([...detailPlane, { seat_class_id: 1, total_seat: 0 }]);
+  };
+
+  const handlePostPlaneData = async () => {
+    const confirmation = window.confirm(
+      "Apakah Anda yakin ingin menambah data pesawat?"
+    );
+    if (confirmation) {
+      const requestBody = {
+        name,
+        series,
+        airline_id: airlineId,
+        capacity,
+        detail_plane: detailPlane,
+      };
+      console.log("requestBody", requestBody);
+
+      try {
+        const response = await axios.post(
+          "https://express-development-3576.up.railway.app/api/v1/admin/plane",
+          requestBody,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(response.data);
+        toast.success("Pesawat Berhasil Ditambahkan");
+
+        // Set ulang state ke nilai awal
+        setName("");
+        setSeries("");
+        setAirlineId(1);
+        setCapacity(100);
+        setDetailPlane([
+          {
+            seat_class_id: 1,
+            total_seat: 40,
+          },
+        ]);
+      } catch (error) {
+        console.error(error);
+        toast.error(error.response.data.message);
+      }
+    }
+  };
 
   return (
     <div>
@@ -605,6 +704,7 @@ export default function AdminPage() {
                         {stats.map((item) => (
                           <div
                             key={item.name}
+                            asd
                             className="px-4 py-5 sm:p-6 hover:bg-gray-100"
                           >
                             <dd className="mt-1 flex flex-col justify-center items-center md:block lg:flex ">
@@ -626,13 +726,17 @@ export default function AdminPage() {
 
                     <div className=" flex flex-row mt-5 gap-5">
                       <div className="flex flex-col">
-                        <div className="font-semibold text-md">Daftar Kota</div>
+                        <div className="font-semibold text-md">
+                          Daftar Pesawat
+                        </div>
                         <div className="border rounded-md shadow-md w-[385px] mt-4">
-                          {/* City Cards */}
                           <div className="">
                             <div className="grid grid-cols-1 gap-2 overflow-y-auto h-[500px] mt-5">
-                              {cities.map((cityName, index) => (
-                                <CityCard key={index} cityName={cityName} />
+                              {getUniquePlanes(planes)?.map((plane, index) => (
+                                <CityCard
+                                  key={plane.id}
+                                  cityName={plane.name}
+                                />
                               ))}
                             </div>
                           </div>{" "}
@@ -643,7 +747,6 @@ export default function AdminPage() {
                           Daftar Negara
                         </div>
                         <div className="border rounded-md shadow-md w-[385px] mt-4">
-                          {/* City Cards */}
                           <div className="">
                             <div className="grid grid-cols-1 gap-2 overflow-y-auto h-[500px] mt-5">
                               {countries.map((countriesName, index) => (
@@ -661,7 +764,6 @@ export default function AdminPage() {
                           Daftar Kontinen
                         </div>
                         <div className="border rounded-md shadow-md w-[385px] mt-4">
-                          {/* City Cards */}
                           <div className="">
                             <div className="grid grid-cols-1 gap-2 overflow-y-auto h-[500px] mt-5">
                               {continents.map((continentsName, index) => (
@@ -679,171 +781,75 @@ export default function AdminPage() {
 
                   {/* /End replace */}
 
-                  {/* post penerbangan */}
+                  {/* post Plane */}
                   <div className="my-20 ">
                     <h1 className="text-3xl text-center mb-5 text-slate-700 font-medium">
-                      Tambah Penerbangan
+                      Tambah Pesawat
                     </h1>
                     <div className="border shadow-md p-10 bg-slate-50">
+                      {" "}
                       <div className="flex justify-between">
                         <div>
-                          <label className="block mb-2  font-semibold ">
-                            Waktu Keberangkatan
-                          </label>
+                          <label className="block mb-2">Nama Pesawat</label>
                           <input
-                            type="time"
-                            name="time_departure"
-                            value={timeDeparture}
-                            onChange={handleTimeChange}
-                            className="border border-slate-500 px-20 py-1 cursor-pointer rounded"
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            className="border p-2 rounded"
                           />
                         </div>
                         <div>
-                          <label className="block mb-2 font-semibold ">
-                            Waktu Tiba
-                          </label>
+                          <label className="block mb-2">Seri</label>
                           <input
-                            type="time"
-                            name="time_arrive"
-                            value={timeArrive}
-                            onChange={handleTimeChange}
-                            className="border border-slate-500 px-20 py-1 cursor-pointer rounded"
+                            type="text"
+                            value={series}
+                            onChange={(e) => setSeries(e.target.value)}
+                            className="border p-2 rounded"
                           />
                         </div>
-
                         <div>
-                          <label className=" font-semibold ">Dari</label>
-                          <div
-                            className=" border mt-2 border-slate-500 px-20 py-1 cursor-pointer rounded"
-                            onClick={onOpenFromModal}
-                          >
-                            {cityFromName || "Pilih Kota Tujuan"}
-                          </div>
-
-                          <Modal
-                            open={openFromModal}
-                            onClose={onCloseFromModal}
-                            center
-                          >
-                            <h2 className="max-sm:text-sm sm:text-sm">
-                              Masukkan Kota Asal
-                            </h2>
-                            <div className="mt-5 text-slate-700 font-semibold max-sm:text-sm max-sm:mb-3 sm:text-sm">
-                              Saran Pencarian
-                            </div>
-                            <div className="overflow-y-scroll h-[300px] mt-2 max-sm:text-xs sm:text-sm">
-                              {postCity?.map((data) => (
-                                <div
-                                  key={data.id}
-                                  className="cursor-pointer hover:bg-gray-200 p-2 max-sm:border-b-2 max-sm:mb-2"
-                                  onClick={() => onSelectCityFrom(data)}
-                                >
-                                  {data.name}
-                                </div>
-                              ))}
-                            </div>
-                          </Modal>
+                          <label className="block mb-2">Id Penerbangan</label>
+                          <input
+                            type="number"
+                            value={airlineId}
+                            onChange={(e) =>
+                              setAirlineId(parseInt(e.target.value, 10))
+                            }
+                            className="border p-2 rounded"
+                          />
                         </div>
-
                         <div>
-                          <label className=" font-semibold ">Ke</label>
-                          <div
-                            className="border mt-2 border-slate-500 px-20 py-1 cursor-pointer rounded"
-                            onClick={onOpenToModal}
-                          >
-                            {cityDestinationName || "Pilih Kota Tujuan"}
-                          </div>
-
-                          <Modal
-                            open={openToModal}
-                            onClose={onCloseToModal}
-                            center
-                          >
-                            <h2 className="max-sm:text-sm sm:text-sm">
-                              Masukkan Kota Tujuan
-                            </h2>
-                            <div className="mt-5 text-slate-700 font-semibold max-sm:text-sm max-sm:mb-3 sm:text-sm">
-                              Saran Pencarian
-                            </div>
-                            <div className="overflow-y-scroll h-[300px] mt-2 max-sm:text-xs sm:text-sm">
-                              {postCity.map((data) => (
-                                <div
-                                  key={data.id}
-                                  className="cursor-pointer hover:bg-gray-200 p-2 max-sm:border-b-2 max-sm:mb-2"
-                                  onClick={() => onSelectCityTo(data)}
-                                >
-                                  {data.name}
-                                </div>
-                              ))}
-                            </div>
-                          </Modal>
+                          <label className="block mb-2">Kapasitas</label>
+                          <input
+                            type="number"
+                            value={capacity}
+                            onChange={(e) =>
+                              setCapacity(parseInt(e.target.value, 10))
+                            }
+                            className="border p-2 rounded"
+                          />
                         </div>
                       </div>
-
-                      <div className="mt-10 font-semibold mb-3">
-                        Pilih Tanggal Keberangkatan
-                      </div>
-                      <div className="flex flex-wrap mt-2 justify-between text-sm">
-                        {[
-                          "is_monday",
-                          "is_tuesday",
-                          "is_wednesday",
-                          "is_thursday",
-                          "is_friday",
-                          "is_saturday",
-                          "is_sunday",
-                        ].map((day) => (
-                          <div key={day} className="mr-4">
-                            <label className="flex items-center">
-                              <input
-                                type="checkbox"
-                                name={day}
-                                checked={days[day]}
-                                onChange={handleDayChange}
-                                className="mr-2 w-5 h-5 cursor-pointer"
-                              />
-                              {day.replace("is_", "").charAt(0).toUpperCase() +
-                                day.replace("is_", "").slice(1)}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="mt-10 ">
-                        <h3 className=" font-semibold ">Detail Penerbangan</h3>
-                        <div className="">
-                          {category.map((cat, index) => (
+                      <div>
+                        <div className="mt-10 ">
+                          {/* <label className="block mb-2">Detail Plane</label> */}
+                          {detailPlane.map((detail, index) => (
                             <div key={index} className="mb-4">
-                              <div className="flex space-x-10">
-                                <div className="mt-3 ">
-                                  <label className="block text-sm">Price</label>
-                                  <input
-                                    type="number"
-                                    value={cat.price}
-                                    onChange={(e) =>
-                                      handleCategoryChange(
-                                        index,
-                                        "price",
-                                        e.target.value
-                                      )
-                                    }
-                                    className="border  py-1 pr-10 pl-2 border-slate-500 rounded mb-2"
-                                  />
-                                </div>
-                                <div className="mt-3">
-                                  <label className="block text-sm">
-                                    Pilih Kelas
+                              <div className="flex space-x-28">
+                                <div>
+                                  <label className="block mb-2">
+                                    Kelas Bangku
                                   </label>
                                   <select
-                                    value={cat.detail_plane_id}
+                                    value={detail.seat_class_id}
                                     onChange={(e) =>
-                                      handleCategoryChange(
+                                      handleDetailChange(
                                         index,
-                                        "detail_plane_id",
-                                        e.target.value
+                                        "seat_class_id",
+                                        parseInt(e.target.value, 10)
                                       )
                                     }
-                                    className="border py-1 pr-10 pl-2 border-slate-500 rounded"
+                                    className="border p-2 rounded"
                                   >
                                     <option value={1}>Ekonomi</option>
                                     <option value={2}>Ekonomi Premium</option>
@@ -852,39 +858,41 @@ export default function AdminPage() {
                                     <option value={5}>Quite Zone</option>
                                   </select>
                                 </div>
+                                <div>
+                                  <label className="block mb-2">
+                                    Total Bangku
+                                  </label>
+                                  <input
+                                    type="number"
+                                    value={detail.total_seat}
+                                    onChange={(e) =>
+                                      handleDetailChange(
+                                        index,
+                                        "total_seat",
+                                        parseInt(e.target.value, 10)
+                                      )
+                                    }
+                                    className="border p-2 rounded"
+                                  />
+                                </div>
                               </div>
                             </div>
                           ))}
+                          <button
+                            onClick={addDetailPlane}
+                            className="mt-4 bg-slate-400 px-5 rounded-full text-xs text-white p-2 "
+                          >
+                            Tambah kelas pesawat
+                          </button>
                         </div>
-                        <button
-                          type="button"
-                          onClick={addCategory}
-                          className="bg-slate-400 px-5 text-white p-2 text-xs rounded-full"
-                        >
-                          Tambah Detail
-                        </button>
-                      </div>
-
-                      <div className="mt-10">
-                        <label className="block mb-2 font-semibold ">
-                          Diskon
-                        </label>
-                        <input
-                          type="number"
-                          name="discount"
-                          value={discount}
-                          onChange={handleDiscountChange}
-                          className="border p-2 rounded"
-                        />
-                      </div>
-
-                      <div className="flex justify-end ">
-                        <button
-                          onClick={handlePostPenerbangan}
-                          className="mt-4 bg-blue-500 text-white p-2 px-5 text-sm rounded "
-                        >
-                          Tambah Penerbangan
-                        </button>
+                        <div className="flex justify-end">
+                          <button
+                            onClick={handlePostPlaneData}
+                            className="mt-4 bg-blue-500 text-sm px-5 text-white p-2 rounded"
+                          >
+                            Tambah Pesawat
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
