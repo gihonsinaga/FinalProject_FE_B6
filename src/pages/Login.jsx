@@ -29,9 +29,13 @@ export default function Login() {
     }
   }, []);
 
+  const getTokenFromUrl = () => {
+    return new URLSearchParams(location.search).get("token");
+  };
+
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
+    const token = getTokenFromUrl();
 
     if (token) {
       dispatch(handleGoogleCallback(navigate));  // Pass navigate function here
