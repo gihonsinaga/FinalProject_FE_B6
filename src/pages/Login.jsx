@@ -117,8 +117,8 @@ export default function Login() {
               onClick={handleGoogleLogin}
               className="flex flex-row shadow w-full h-[40px] self-center mt-3 bg-slate-200 hover:bg-slate-300 focus:shadow-outline focus:outline-none text-black py-2 px-4 rounded-lg justify-center"
             >
-              <FcGoogle className="mr-2 mt-10" />
-              <span className="mt-0 max-sm:text-xs">Masuk dengan Google </span>
+              <FcGoogle className="mr-2 mt-1" />
+              <span className="mt-1 lg:mt-0 max-sm:text-xs">Masuk dengan Google r</span>
             </button>
           </div>
           <div>{/* Additional content */}</div>
