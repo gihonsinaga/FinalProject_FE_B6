@@ -834,7 +834,7 @@ export default function SearchResult() {
                 </div>
               </div>
             ) : (
-              <div className="sm:px-4 space-y-4 sm:w-[850px] max-sm:w-[full] ">
+              <div className="sm:px-4 space-y-4 overflow-y-scroll h-[500px] sm:w-[850px] max-sm:w-[full] ">
                 {data.map((item, i) => (
                   <div
                     key={i}
