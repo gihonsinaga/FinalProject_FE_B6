@@ -34,9 +34,9 @@ export default function Login() {
     const token = urlParams.get('token');
 
     if (token) {
-      dispatch(handleGoogleCallback());
+      dispatch(handleGoogleCallback(navigate));  // Pass navigate function here
     }
-  }, [dispatch, location]);
+  }, [dispatch, location, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
