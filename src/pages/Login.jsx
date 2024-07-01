@@ -7,7 +7,7 @@ import loginPict from '../assets/login.png';
 import ikon from '/assets/LogoFlyNow.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import BottomNav from '../component/BottomNav';
-import { login, googleLogin, handleGoogleCallback } from '../redux/actions/authActions';
+import { login, googleLogin } from '../redux/actions/authActions';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -26,7 +26,6 @@ export default function Login() {
     }
   }, [token, navigate]);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -40,7 +39,7 @@ export default function Login() {
   };
 
   const handleGoogleLogin = () => {
-    dispatch(googleLogin());
+    dispatch(googleLogin(navigate));
   };
 
   return (

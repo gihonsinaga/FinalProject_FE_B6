@@ -161,12 +161,15 @@ export const registerLoginWithGoogleAction = (accessToken, navigate) => async (d
     };
 
     const response = await axios.request(config);
-    const { token } = response.data.data;
+    const { token, user } = response.data.data;
 
     dispatch(setToken(token));
     dispatch(setIsLoggedIn(true));
-    dispatch(getMe(null, null, null));
-    navigate('/LandingPage');
+    dispatch(setUser(user.email));
+    dispatch(setRole(user.role));
+    localStorage.setItem('token', token);
+    toast.success('Login successful!');
+    navigate('/');
 
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -177,7 +180,7 @@ export const registerLoginWithGoogleAction = (accessToken, navigate) => async (d
   }
 };
 
-export const googleLogin = useGoogleLogin({
+export const googleLogin = (navigate) => useGoogleLogin({
   onSuccess: async (tokenResponse) => {
     const { access_token } = tokenResponse;
     dispatch(registerLoginWithGoogleAction(access_token, navigate));
