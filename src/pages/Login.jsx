@@ -21,7 +21,7 @@ export default function Login() {
 
   useEffect(() => {
     if (token !== null) {
-      alert("Please log out first before signing up again");
+      // alert("Please log out first before signing up again");
       navigate("/");
     }
   }, [token, navigate]);
