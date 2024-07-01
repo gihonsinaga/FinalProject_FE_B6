@@ -23,13 +23,13 @@ export const login = (data, navigate, redirectTo) => async (dispatch) => {
     const response = await axios.request(config);
     if (response.data.status === true) {
       const { token, email } = response.data.data;
-      console.log("response", response.data.data);
+      // console.log("response", response.data.data);
       dispatch(setToken(token));
       dispatch(setIsLoggedIn(true));
       dispatch(setUser(email));
       toast.success("Login successful!");
       const role = response.data.data.role;
-      console.log("role", role);
+      // console.log("role", role);
       dispatch(setRole(role));
       setTimeout(() => {
         {
@@ -68,9 +68,16 @@ export const register = (data, navigate) => async (dispatch) => {
       },
       data: data,
     };
+    
+    // Parse data untuk mendapatkan email
+    const parsedData = JSON.parse(data);
+    const email = parsedData.email;
+
     const response = await axios.request(config);
-    const { token, email } = response.data;
+    const { token } = response.data;
+    
     toast.success("Registration successful!");
+    
     setTimeout(() => {
       navigate("/otp", { state: { email, token } });
     }, 2000);
@@ -89,7 +96,6 @@ export const register = (data, navigate) => async (dispatch) => {
     toast.error("An error occurred during register!");
   }
 };
-
 export const logout = (navigate) => async (dispatch) => {
   try {
     // Reset state
