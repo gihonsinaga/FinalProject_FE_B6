@@ -29,17 +29,6 @@ export default function Profile() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   const storedImage = localStorage.getItem("avatar_url");
-  //   if (storedImage) {
-  //     setFormData((prevData) => ({
-  //       ...prevData,
-  //       avatar_url: storedImage,
-  //     }));
-  //     setPreview(storedImage);
-  //   }
-  // }, []);
-
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (files && files.length > 0) {
@@ -50,6 +39,13 @@ export default function Profile() {
         avatar_url: file,
       }));
       setPreview(previewUrl);
+    } else if (name === 'phoneNumber') {
+      // Only allow numeric input for phoneNumber
+      const numericValue = value.replace(/[^0-9]/g, '');
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: numericValue,
+      }));
     } else {
       setFormData((prevData) => ({
         ...prevData,
@@ -63,54 +59,53 @@ export default function Profile() {
   };
 
   const handleSave = async () => {
-    const formDataToSend = new FormData();
-    formDataToSend.append("fullname", formData.fullname);
-    formDataToSend.append("phoneNumber", formData.phoneNumber);
-    if (formData.avatar_url instanceof File) {
-      formDataToSend.append("avatar_url", formData.avatar_url);
-    }
+  const formDataToSend = new FormData();
+  formDataToSend.append("fullname", formData.fullname);
+  formDataToSend.append("phoneNumber", formData.phoneNumber);
+  if (formData.avatar_url instanceof File) {
+    formDataToSend.append("avatar_url", formData.avatar_url);
+  }
 
-    try {
-      const response = await fetch(
-        "https://express-development-3576.up.railway.app/api/v1/profile",
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formDataToSend,
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to update profile");
+  try {
+    const response = await fetch(
+      "https://express-development-3576.up.railway.app/api/v1/profile",
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formDataToSend,
       }
+    );
 
-      const data = await response.json();
+    const data = await response.json();
 
-      // console.log("Profile updated successfully:", data);
+    if (response.ok) {
       dispatch(setUser(data));
-
       localStorage.setItem("avatar_url", data.data.avatar_url);
-
       setFormData((prevData) => ({
         ...prevData,
         avatar_url: data.data.avatar_url,
       }));
-
       setPreview(data.data.avatar_url);
-
       setIsEditing(false);
-
-      // Show success toast
-      toast.success("sukses merubah profil");
-    } catch (error) {
-      // console.error("Error updating profile:", error);
-
-      // Show error toast
-      toast.error("gagal merubah profil");
+      toast.success("Successfully updated profile");
+    } else {
+      if (response.status === 400) {
+        toast.error(data.message || "Input must be provided!");
+      } else if (response.status === 404) {
+        toast.error("User ID not found!");
+      } else {
+        toast.error(data.message || "Failed to update profile");
+      }
     }
-  };
+  } catch (error) {
+    console.error("Network error:", error);
+    toast.error("Failed to connect to server.");
+  }
+};
+
+  
 
   const handleCancel = () => {
     setFormData({
@@ -259,6 +254,7 @@ export default function Profile() {
                                   name="phoneNumber"
                                   id="phoneNumber"
                                   autoComplete="tel"
+                                  pattern="[0-9]*"
                                   className="mt-1 cursor-pointer border-b focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md py-2 px-2"
                                   value={formData.phoneNumber}
                                   onChange={handleChange}

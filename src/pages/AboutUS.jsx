@@ -97,13 +97,13 @@ export default function AboutUS() {
 
         <section>
           {/* <h2 className="text-2xl font-semibold mb-2">Tim Kami</h2> */}
-          <div className="bg-white rounded-xl p-20 md:px-16 lg:px-32 lg:py-16 my-12">
+          <div className="bg-white rounded-xl sm:p-20 md:px-16 lg:px-32 lg:py-16 my-12">
             <div className="mb-12 font-bold text text-2xl">
               FlyNow Team
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-8">
                 <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
                   <img
-                    src="src/assets/gihon.jpg"
+                    src="assets/gihon.jpg"
                     alt="Anggota Tim 1"
                     className="w-full h-48 object-cover"
                   />
@@ -116,7 +116,7 @@ export default function AboutUS() {
                 </div>
                 <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
                   <img
-                    src="src/assets/zanneta.png"
+                    src="assets/zanneta.png"
                     alt="Anggota Tim 2"
                     className="w-full h-48 object-cover"
                   />
@@ -129,7 +129,7 @@ export default function AboutUS() {
                 </div>
                 <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
                   <img
-                    src="src/assets/rafi.jpg"
+                    src="assets/rafi.jpg"
                     alt="Anggota Tim 3"
                     className="w-full h-48 object-cover"
                   />
@@ -142,7 +142,7 @@ export default function AboutUS() {
                 </div>
                 <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
                   <img
-                    src="src/assets/bagus.png"
+                    src="assets/bagus.png"
                     alt="Anggota Tim 1"
                     className="w-full h-48 object-cover"
                   />
@@ -168,7 +168,7 @@ export default function AboutUS() {
                 </div>
                 <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
                   <img
-                    src="src/assets/shakti.jpg"
+                    src="assets/shakti.JPG"
                     alt="Anggota Tim 3"
                     className="w-full h-48 object-cover"
                   />
