@@ -150,8 +150,10 @@ export const handleGoogleCallback = (navigate) => async (dispatch) => {
   try {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
+    console.log('token', token)
 
     if (token) {
+      console.log('token2', token)
       localStorage.setItem('token', token);
       dispatch(setToken(token));
       dispatch(setIsLoggedIn(true));
