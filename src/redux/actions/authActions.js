@@ -39,7 +39,7 @@ export const login = (data, navigate, redirectTo) => async (dispatch) => {
             navigate(redirectTo);
           }
         }
-      }, 2000);
+      }, 20);
     } else {
       toast.error(response.data.message || "Login failed!");
     }
@@ -68,16 +68,16 @@ export const register = (data, navigate) => async (dispatch) => {
       },
       data: data,
     };
-    
+
     // Parse data untuk mendapatkan email
     const parsedData = JSON.parse(data);
     const email = parsedData.email;
 
     const response = await axios.request(config);
     const { token } = response.data;
-    
+
     toast.success("Registration successful!");
-    
+
     setTimeout(() => {
       navigate("/otp", { state: { email, token } });
     }, 2000);
@@ -90,7 +90,7 @@ export const register = (data, navigate) => async (dispatch) => {
       } else {
         toast.error("An error occurred during register!");
       }
-      console.log("error.response.data.message", error.response.data.message);
+      // console.log("error.response.data.message", error.response.data.message);
       return;
     }
     toast.error("An error occurred during register!");
@@ -110,7 +110,7 @@ export const logout = (navigate) => async (dispatch) => {
     // toast.success("Logged out successfully!");
     navigate("/");
   } catch (error) {
-    console.error("Logout error:", error);
+    // console.error("Logout error:", error);
     toast.error("An error occurred during logout!");
   }
 };
@@ -134,7 +134,7 @@ export const authenticateUser = () => async (dispatch, getState) => {
       // console.log('token', token)
     }
   } catch (error) {
-    console.error("Authentication error:", error);
+    // console.error("Authentication error:", error);
     if (error.response && error.response.status === 401) {
       // Token tidak valid atau kadaluarsa
       dispatch(setToken(null));

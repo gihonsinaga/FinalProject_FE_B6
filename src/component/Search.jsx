@@ -170,10 +170,10 @@ export default function Search() {
         setCity(dataCity);
         setCity2(dataCity);
       } else {
-        console.error("Error fetching seat class:", response);
+        // console.error("Error fetching seat class:", response);
       }
     } catch (error) {
-      console.error("Error fetching seat class:", error);
+      // console.error("Error fetching seat class:", error);
     }
   };
 
@@ -204,10 +204,10 @@ export default function Search() {
         setClass(dataClass);
         // console.log("response class", dataClass);
       } else {
-        console.error("Error fetching seat class:", Class);
+        // console.error("Error fetching seat class:", Class);
       }
     } catch (error) {
-      console.error("Error fetching seat class:", error);
+      // console.error("Error fetching seat class:", error);
     }
   };
 

@@ -69,7 +69,7 @@ export default function Otp() {
       }, 2000);
     } catch (error) {
       toast.error("OTP verification failed!");
-      console.error(error);
+      // console.error(error);
     }
   };
 
@@ -96,7 +96,7 @@ export default function Otp() {
       }, 1000);
     } catch (error) {
       toast.error("Failed to resend OTP!");
-      console.error(error);
+      // console.error(error);
     }
   };
 

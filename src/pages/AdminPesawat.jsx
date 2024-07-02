@@ -466,7 +466,7 @@ export default function AdminPage() {
         capacity,
         detail_plane: detailPlane,
       };
-      console.log("requestBody", requestBody);
+      // console.log("requestBody", requestBody);
 
       try {
         const response = await axios.post(
@@ -478,7 +478,7 @@ export default function AdminPage() {
             },
           }
         );
-        console.log(response.data);
+        // console.log(response.data);
         toast.success("Pesawat Berhasil Ditambahkan");
 
         // Set ulang state ke nilai awal

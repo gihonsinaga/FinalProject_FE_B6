@@ -169,7 +169,7 @@ export default function SearchResult() {
       width: "95%",
       height: "100%",
       maxWidth: "1350px",
-      maxHeight: "60vh",
+      maxHeight: "85vh",
       background: "white",
       border: "none",
       padding: "20px",
@@ -544,8 +544,8 @@ export default function SearchResult() {
                       className="max-sm:ml-2 sm:flex max-sm:text-[10px]"
                       key={i}
                     >
-                      {data?.city_destination?.code} {">"}{" "}
-                      {data?.city_arive?.code}
+                      {data?.city_arive?.code} {">"}{" "}
+                      {data?.city_destination?.code}
                       <span className="max-sm:hidden sm:mx-1"> - </span>
                       <div className="max-sm:text-[10px] max-sm:-mt-1">
                         {" "}
@@ -573,7 +573,7 @@ export default function SearchResult() {
             overlayClassName="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
             contentLabel="Search Modal"
           >
-            <div className="relative  bg-white w-full h-full overflow-auto">
+            <div className="relative  bg-white w-full h-full ">
               <div className="flex justify-between sm:text-3xl sm:mt-10 sm:px-10 font-extrabold max-sm:mb-2 text-slate-600 ">
                 <div className="sm:text-2xl ">Ubah Jadwal Penerbangan </div>
                 <div
@@ -814,7 +814,7 @@ export default function SearchResult() {
           <div className="border-gray-300 border-b-2 my-3 sm:hidden mx-32 max-sm:mt-2 max-sm:mb-5 "></div>
 
           {/* list tiket */}
-          <div className="text-center sm:overflow-y-scroll sm:h-[450px] max-sm:h-[full] max-sm:text-xs">
+          <div className="text-center  sm:h-[450px] max-sm:text-xs max-sm:overflow-y-scroll  max-sm:h-[700px]">
             {/* booking tiket 1 */}
             {isEmpty ? (
               <div className="flex flex-col mt-10 sm:px-60">
@@ -834,7 +834,7 @@ export default function SearchResult() {
                 </div>
               </div>
             ) : (
-              <div className="sm:px-4 space-y-4 overflow-y-scroll h-[500px] sm:w-[850px] max-sm:w-[full] ">
+              <div className="sm:px-4 space-y-4 overflow-y-scroll sm:h-[500px] sm:w-[850px] max-sm:w-[full] ">
                 {data.map((item, i) => (
                   <div
                     key={i}
@@ -983,7 +983,7 @@ export default function SearchResult() {
         {/* Pagination */}
 
         <div className="max-sm:flex max-sm:justify-end max-sm:mt-5 max-sm:mb-5">
-          <div className="flex justify-end items-center sm:mt-5 max-sm:mr-5 max-sm:mt-2 max-sm:mb-5 ">
+          <div className="flex justify-end items-center sm:mt-20 max-sm:mr-5 max-sm:mt-2 max-sm:mb-5 ">
             <button
               disabled={currentPage === 1 || isLoading}
               onClick={() => handlePagination(currentPage - 1, "price")}

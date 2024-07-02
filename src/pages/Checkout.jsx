@@ -101,7 +101,7 @@ export default function Checkout() {
         });
       }, 2000);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      // console.error("Error fetching data:", error);
       toast.error(error?.response?.data?.message);
     }
   };

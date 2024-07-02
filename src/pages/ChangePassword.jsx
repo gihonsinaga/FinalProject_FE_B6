@@ -76,7 +76,7 @@ export default function ChangePassword() {
         }
       }
     } catch (error) {
-      console.error("Network error:", error);
+      // console.error("Network error:", error);
       toast.error("Failed to connect to server.");
     }
   };

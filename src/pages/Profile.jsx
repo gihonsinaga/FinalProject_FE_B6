@@ -39,9 +39,9 @@ export default function Profile() {
         avatar_url: file,
       }));
       setPreview(previewUrl);
-    } else if (name === 'phoneNumber') {
+    } else if (name === "phoneNumber") {
       // Only allow numeric input for phoneNumber
-      const numericValue = value.replace(/[^0-9]/g, '');
+      const numericValue = value.replace(/[^0-9]/g, "");
       setFormData((prevData) => ({
         ...prevData,
         [name]: numericValue,
@@ -59,53 +59,51 @@ export default function Profile() {
   };
 
   const handleSave = async () => {
-  const formDataToSend = new FormData();
-  formDataToSend.append("fullname", formData.fullname);
-  formDataToSend.append("phoneNumber", formData.phoneNumber);
-  if (formData.avatar_url instanceof File) {
-    formDataToSend.append("avatar_url", formData.avatar_url);
-  }
-
-  try {
-    const response = await fetch(
-      "https://express-development-3576.up.railway.app/api/v1/profile",
-      {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formDataToSend,
-      }
-    );
-
-    const data = await response.json();
-
-    if (response.ok) {
-      dispatch(setUser(data));
-      localStorage.setItem("avatar_url", data.data.avatar_url);
-      setFormData((prevData) => ({
-        ...prevData,
-        avatar_url: data.data.avatar_url,
-      }));
-      setPreview(data.data.avatar_url);
-      setIsEditing(false);
-      toast.success("Successfully updated profile");
-    } else {
-      if (response.status === 400) {
-        toast.error(data.message || "Input must be provided!");
-      } else if (response.status === 404) {
-        toast.error("User ID not found!");
-      } else {
-        toast.error(data.message || "Failed to update profile");
-      }
+    const formDataToSend = new FormData();
+    formDataToSend.append("fullname", formData.fullname);
+    formDataToSend.append("phoneNumber", formData.phoneNumber);
+    if (formData.avatar_url instanceof File) {
+      formDataToSend.append("avatar_url", formData.avatar_url);
     }
-  } catch (error) {
-    console.error("Network error:", error);
-    toast.error("Failed to connect to server.");
-  }
-};
 
-  
+    try {
+      const response = await fetch(
+        "https://express-development-3576.up.railway.app/api/v1/profile",
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formDataToSend,
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        dispatch(setUser(data));
+        localStorage.setItem("avatar_url", data.data.avatar_url);
+        setFormData((prevData) => ({
+          ...prevData,
+          avatar_url: data.data.avatar_url,
+        }));
+        setPreview(data.data.avatar_url);
+        setIsEditing(false);
+        toast.success("Successfully updated profile");
+      } else {
+        if (response.status === 400) {
+          toast.error(data.message || "Input must be provided!");
+        } else if (response.status === 404) {
+          toast.error("User ID not found!");
+        } else {
+          toast.error(data.message || "Failed to update profile");
+        }
+      }
+    } catch (error) {
+      // console.error("Network error:", error);
+      toast.error("Failed to connect to server.");
+    }
+  };
 
   const handleCancel = () => {
     setFormData({
