@@ -91,6 +91,7 @@ export default function AdminPage() {
   ];
 
   const [planes, setPlanes] = useState([]);
+  // console.log("planes", planes);
   const token = useSelector((state) => state.auth.token);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [cities, setCities] = useState([]);
@@ -270,7 +271,11 @@ export default function AdminPage() {
     is_saturday: false,
     is_sunday: false,
   });
-  const [category, setCategory] = useState([{ price: 0, detail_plane_id: 1 }]);
+  const [category, setCategory] = useState([
+    { price: 0, detail_plane_id: null },
+  ]);
+  // console.log("category.detail_plane_id", category);
+  // console.log("days", days);
 
   // console.log("cityDestinationId", cityDestinationId);
   // console.log("cityFromId", cityFromId);
@@ -320,6 +325,13 @@ export default function AdminPage() {
     }));
   };
 
+  // const handleCategoryChange = (index, field, value) => {
+  //   console.log("index", field);
+  //   const newCategory = [...category];
+  //   newCategory[index][field] = value;
+  //   setCategory(newCategory);
+  // };
+
   const handleCategoryChange = (index, field, value) => {
     const newCategory = [...category];
     newCategory[index][field] = value;
@@ -327,7 +339,28 @@ export default function AdminPage() {
   };
 
   const addCategory = () => {
-    setCategory([...category, { price: 0, detail_plane_id: 1 }]);
+    setCategory([...category, { price: 0, detail_plane_id: null }]);
+  };
+
+  const [selectedPlaneId, setSelectedPlaneId] = useState(null);
+  // console.log("selectedPlaneId", selectedPlaneId);
+  const [planeDetails, setPlaneDetails] = useState({});
+  // console.log("planeDetatails", planeDetails);
+
+  const handlePlaneSelection = async (value) => {
+    setSelectedPlaneId(value);
+    if (value) {
+      try {
+        const response = await axios.get(
+          `https://express-development-3576.up.railway.app/api/v1/plane/${value}`
+        );
+        setPlaneDetails(response.data.data.DetailPlane);
+      } catch (error) {
+        // console.error("Error fetching plane details:", error);
+      }
+    } else {
+      setPlaneDetails([]);
+    }
   };
 
   // const token = useSelector((state) => state.auth);
@@ -786,7 +819,7 @@ export default function AdminPage() {
                       <div className="flex flex-wrap mt-2 justify-between text-sm">
                         {[
                           "is_monday",
-                          "is_tuesday",
+                          "is_thuesday",
                           "is_wednesday",
                           "is_thursday",
                           "is_friday",
@@ -827,31 +860,58 @@ export default function AdminPage() {
                                         e.target.value
                                       )
                                     }
-                                    className="border  py-1 pr-10 pl-2 border-slate-500 rounded mb-2"
+                                    className="border py-1 pr-10 pl-2 border-slate-500 rounded mb-2"
                                   />
                                 </div>
                                 <div className="mt-3">
                                   <label className="block text-sm">
-                                    Pilih Kelas
+                                    Pilih Pesawat
                                   </label>
                                   <select
-                                    value={cat.detail_plane_id}
+                                    value={selectedPlaneId}
                                     onChange={(e) =>
-                                      handleCategoryChange(
-                                        index,
-                                        "detail_plane_id",
-                                        e.target.value
-                                      )
+                                      handlePlaneSelection(e.target.value)
                                     }
                                     className="border py-1 pr-10 pl-2 border-slate-500 rounded"
                                   >
-                                    <option value={1}>Ekonomi</option>
-                                    <option value={2}>Ekonomi Premium</option>
-                                    <option value={3}>Bisnis</option>
-                                    <option value={4}>First Class</option>
-                                    <option value={5}>Quite Zone</option>
+                                    <option value="">Select a plane</option>
+                                    {planes?.map((plane) => (
+                                      <option key={plane.id} value={plane.id}>
+                                        {plane.name}
+                                      </option>
+                                    ))}
                                   </select>
                                 </div>
+                                {selectedPlaneId && planeDetails.length > 0 && (
+                                  <div className="mt-3">
+                                    <label className="block text-sm">
+                                      Pilih Kelas
+                                    </label>
+                                    <select
+                                      value={cat.detail_plane_id}
+                                      onChange={(e) =>
+                                        handleCategoryChange(
+                                          index,
+                                          "detail_plane_id",
+                                          e.target.value
+                                        )
+                                      }
+                                      className="border py-1 pr-10 pl-2 border-slate-500 rounded"
+                                    >
+                                      <option value="">
+                                        Select a seat class
+                                      </option>
+                                      {planeDetails.map((detail) => (
+                                        <option
+                                          key={detail.id}
+                                          value={detail.id}
+                                        >
+                                          {detail.seat_class.type_class}
+                                        </option>
+                                      ))}
+                                    </select>
+                                  </div>
+                                )}
                               </div>
                             </div>
                           ))}

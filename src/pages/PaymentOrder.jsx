@@ -298,7 +298,7 @@ export default function PaymentOrder() {
             </div>
             <div className="border-slate-50 border-b-2 my-3 sm:hidden px-40 max-sm:mt-2"></div>
 
-            <div className="flex flex-col items-center sm:mt-5 max-sm:mr-5 ">
+            <div className="flex flex-col items-center sm:mt-5 max-sm:mr-4 max-sm:ml-5 ">
               <div className="sm:w-[550px] max-sm:w-full">
                 {/* midtrans Section */}
                 <div

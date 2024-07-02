@@ -56,10 +56,10 @@ export default function HomePage() {
           // console.log("response category", dataCategory);
           setActiveButton(dataCategory);
         } else {
-          console.error("Error fetching seat class:", response);
+          // console.error("Error fetching seat class:", response);
         }
       } catch (error) {
-        console.error("Error fetching seat class:", error);
+        // console.error("Error fetching seat class:", error);
       }
     };
 
@@ -82,10 +82,10 @@ export default function HomePage() {
           // console.log("response category filter", dataCategoryFilter);
           setRecomendation(dataCategoryFilter);
         } else {
-          console.error("Error fetching recommendations:", response);
+          // console.error("Error fetching recommendations:", response);
         }
       } catch (error) {
-        console.error("Error fetching recommendations:", error);
+        // console.error("Error fetching recommendations:", error);
       }
     };
 

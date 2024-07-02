@@ -50,7 +50,7 @@ export default function History() {
       setData(response.data.data);
       // console.log("Orders fetched:", response.data.data);
     } catch (error) {
-      console.error("Error fetching orders:", error);
+      // console.error("Error fetching orders:", error);
     }
   };
 
@@ -73,7 +73,7 @@ export default function History() {
 
       // console.log("Orders fetched:", response.data.data);
     } catch (error) {
-      console.error("Error fetching orders:", error);
+      // console.error("Error fetching orders:", error);
     }
   };
 
@@ -184,7 +184,7 @@ export default function History() {
 
       // console.log("Order details fetched:", orderDetails);
     } catch (error) {
-      console.error("Error fetching order details:", error);
+      // console.error("Error fetching order details:", error);
     }
   };
 
@@ -238,7 +238,7 @@ export default function History() {
 
       // console.log("Order details fetched:", orderDetails);
     } catch (error) {
-      console.error("Error fetching order details:", error);
+      // console.error("Error fetching order details:", error);
     }
   };
 
@@ -280,7 +280,7 @@ export default function History() {
       setData(dataFiltered);
       // console.log(`Data filtered by ${status}:`, dataFiltered);
     } catch (error) {
-      console.error(`Error fetching orders with status ${status}:`, error);
+      // console.error(`Error fetching orders with status ${status}:`, error);
     }
   };
 
