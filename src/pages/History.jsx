@@ -40,7 +40,7 @@ export default function History() {
   const fetchOrders = async () => {
     try {
       const response = await axios.get(
-        "https://express-development-3576.up.railway.app/api/v1/ticket/orders?page=1",
+        "https://expressjs-production-53af.up.railway.app/api/v1/ticket/orders?page=1",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -59,7 +59,7 @@ export default function History() {
 
     try {
       const response = await axios.get(
-        `https://express-development-3576.up.railway.app/api/v1/ticket/orders?page=${page}`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/ticket/orders?page=${page}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -86,7 +86,7 @@ export default function History() {
   const fetchOrderDetails = async (orderId) => {
     try {
       const response = await axios.get(
-        `https://express-development-3576.up.railway.app/api/v1/ticket/order/${orderId}`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/ticket/order/${orderId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -171,7 +171,7 @@ export default function History() {
   const searchHistory = async (searchValue) => {
     try {
       const response = await axios.get(
-        `https://express-development-3576.up.railway.app/api/v1/ticket/orders?find=${searchValue}`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/ticket/orders?find=${searchValue}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -225,7 +225,7 @@ export default function History() {
   const sortDate = async () => {
     try {
       const response = await axios.get(
-        ` https://express-development-3576.up.railway.app/api/v1/ticket/orders?startDate=${startDate}&endDate=${endDate}`,
+        ` https://expressjs-production-53af.up.railway.app/api/v1/ticket/orders?startDate=${startDate}&endDate=${endDate}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -269,7 +269,7 @@ export default function History() {
   const filterByStatus = async (status) => {
     try {
       const response = await axios.get(
-        `https://express-development-3576.up.railway.app/api/v1/ticket/orders?filter=${status}`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/ticket/orders?filter=${status}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

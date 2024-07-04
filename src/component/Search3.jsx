@@ -102,7 +102,7 @@ export default function Search3() {
     e.preventDefault();
     axios
       .post(
-        "https://express-development-3576.up.railway.app/api/v1/ticket/schedule?page=1",
+        "https://expressjs-production-53af.up.railway.app/api/v1/ticket/schedule?page=1",
         data
       )
       .then((response) => {
@@ -136,7 +136,7 @@ export default function Search3() {
   const getCity = async () => {
     try {
       const response = await axios.get(
-        "https://express-development-3576.up.railway.app/api/v1/cities"
+        "https://expressjs-production-53af.up.railway.app/api/v1/cities"
       );
       if (response.status === 200) {
         const dataCity = response.data.data;
@@ -168,7 +168,7 @@ export default function Search3() {
   const getSeatClass = async () => {
     try {
       const response = await axios.get(
-        "https://express-development-3576.up.railway.app/api/v1/ticket/class"
+        "https://expressjs-production-53af.up.railway.app/api/v1/ticket/class"
       );
       if (response.status === 200) {
         const dataClass = response.data.data;

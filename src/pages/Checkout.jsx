@@ -82,7 +82,7 @@ export default function Checkout() {
   const orderTicket = async (data) => {
     try {
       const response = await axios.post(
-        `https://express-development-3576.up.railway.app/api/v1/ticket/order/${flightDetailId}`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/ticket/order/${flightDetailId}`,
         data,
         {
           headers: {

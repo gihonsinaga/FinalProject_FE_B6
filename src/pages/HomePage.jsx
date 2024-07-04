@@ -49,7 +49,7 @@ export default function HomePage() {
     const getCategory = async () => {
       try {
         const response = await axios.get(
-          "https://express-development-3576.up.railway.app/api/v1/ticket/schedule/category"
+          "https://expressjs-production-53af.up.railway.app/api/v1/ticket/schedule/category"
         );
         if (response.status === 200) {
           const dataCategory = response.data.data;
@@ -73,8 +73,8 @@ export default function HomePage() {
     const getCategoryFilter = async () => {
       try {
         const url = idCategory
-          ? `https://express-development-3576.up.railway.app/api/v1/ticket/schedule/recomendation?category_id=${idCategory}` //filter recomendation
-          : "https://express-development-3576.up.railway.app/api/v1/ticket/schedule/recomendation"; //get all recomendation
+          ? `https://expressjs-production-53af.up.railway.app/api/v1/ticket/schedule/recomendation?category_id=${idCategory}` //filter recomendation
+          : "https://expressjs-production-53af.up.railway.app/api/v1/ticket/schedule/recomendation"; //get all recomendation
 
         const response = await axios.get(url);
         if (response.status === 200) {
@@ -172,7 +172,7 @@ export default function HomePage() {
     // console.log("data", data);
     axios
       .post(
-        "https://express-development-3576.up.railway.app/api/v1/ticket/schedule?page=1",
+        "https://expressjs-production-53af.up.railway.app/api/v1/ticket/schedule?page=1",
         data
       )
       .then((response) => {
@@ -206,7 +206,7 @@ export default function HomePage() {
         <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 sm:px-40 lg:py-20 lg:flex-row lg:justify-between">
           <h1 className="text-white mt-24 max-sm:text-center">
             <span className="tracking-wide font-bold sm:text-5xl max-sm:text-2xl">
-              Dreams To <span className="text-slate-400">Fly</span> With Us{" "}
+              Dream To <span className="text-slate-400">Fly</span> With Us{" "}
               <span className="text-slate-300">Now</span>
             </span>
             <p className="tracking-wider sm:text-base sm:mt-5 max-sm:mt-2 font-light sm:w-[400px] max-sm:px-5 max-sm:text-xs">

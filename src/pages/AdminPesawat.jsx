@@ -108,7 +108,7 @@ export default function AdminPage() {
     const fetchPlanes = async () => {
       try {
         const response = await axios.get(
-          "https://express-development-3576.up.railway.app/api/v1/planes",
+          "https://expressjs-production-53af.up.railway.app/api/v1/planes",
           {
             headers: {
               accept: "application/json",
@@ -144,7 +144,7 @@ export default function AdminPage() {
     const userCount = async () => {
       try {
         const response = await axios.get(
-          "https://express-development-3576.up.railway.app/api/v1/admin/count",
+          "https://expressjs-production-53af.up.railway.app/api/v1/admin/count",
           {
             headers: {
               Accept: "application/json",
@@ -168,7 +168,7 @@ export default function AdminPage() {
   const fetchCities = async () => {
     try {
       const response = await axios.get(
-        "https://express-development-3576.up.railway.app/api/v1/cities",
+        "https://expressjs-production-53af.up.railway.app/api/v1/cities",
         {
           headers: {
             accept: "application/json",
@@ -195,7 +195,7 @@ export default function AdminPage() {
   const fetchCountries = async () => {
     try {
       const response = await axios.get(
-        "https://express-development-3576.up.railway.app/api/v1/countries",
+        "https://expressjs-production-53af.up.railway.app/api/v1/countries",
         {
           headers: {
             accept: "application/json",
@@ -215,7 +215,7 @@ export default function AdminPage() {
   const fetchContinents = async () => {
     try {
       const response = await axios.get(
-        "https://express-development-3576.up.railway.app/api/v1/continents",
+        "https://expressjs-production-53af.up.railway.app/api/v1/continents",
         {
           headers: {
             accept: "application/json",
@@ -391,7 +391,7 @@ export default function AdminPage() {
 
       try {
         const response = await axios.post(
-          "https://express-development-3576.up.railway.app/api/v1/admin/flight",
+          "https://expressjs-production-53af.up.railway.app/api/v1/admin/flight",
           requestBody,
           {
             headers: {
@@ -470,7 +470,7 @@ export default function AdminPage() {
 
       try {
         const response = await axios.post(
-          "https://express-development-3576.up.railway.app/api/v1/admin/plane",
+          "https://expressjs-production-53af.up.railway.app/api/v1/admin/plane",
           requestBody,
           {
             headers: {

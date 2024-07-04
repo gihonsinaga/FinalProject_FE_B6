@@ -169,7 +169,7 @@ export default function SearchResult() {
       width: "95%",
       height: "100%",
       maxWidth: "1350px",
-      maxHeight: "85vh",
+      maxHeight: "73vh",
       background: "white",
       border: "none",
       padding: "20px",
@@ -217,7 +217,7 @@ export default function SearchResult() {
     setIsLoading(true);
     axios
       .post(
-        `https://express-development-3576.up.railway.app/api/v1/ticket/schedule?page=${page}`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/ticket/schedule?page=${page}`,
         dataPagination
       )
       .then((response) => {
@@ -269,7 +269,7 @@ export default function SearchResult() {
     setIsLoading(true);
     axios
       .post(
-        `https://express-development-3576.up.railway.app/api/v1/ticket/schedule?page=${page}`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/ticket/schedule?page=${page}`,
         filterPrice
       )
       .then((response) => {
@@ -348,7 +348,7 @@ export default function SearchResult() {
     setIsLoading(true);
     axios
       .post(
-        `https://express-development-3576.up.railway.app/api/v1/ticket/schedule?page=${page}`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/ticket/schedule?page=${page}`,
         filterTime
       )
       .then((response) => {
@@ -389,7 +389,7 @@ export default function SearchResult() {
 
     axios
       .post(
-        `https://express-development-3576.up.railway.app/api/v1/ticket/schedule?page=1`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/ticket/schedule?page=1`,
         dataa
       )
       .then((response) => {
@@ -433,7 +433,7 @@ export default function SearchResult() {
 
     axios
       .post(
-        `https://express-development-3576.up.railway.app/api/v1/ticket/schedule?page=1`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/ticket/schedule?page=1`,
         sortingPrice
       )
       .then((response) => {
@@ -479,7 +479,7 @@ export default function SearchResult() {
 
     axios
       .post(
-        `https://express-development-3576.up.railway.app/api/v1/ticket/schedule?page=1`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/ticket/schedule?page=1`,
         sortingTime
       )
       .then((response) => {

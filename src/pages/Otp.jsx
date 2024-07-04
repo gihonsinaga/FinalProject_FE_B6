@@ -55,7 +55,7 @@ export default function Otp() {
 
     try {
       await axios.put(
-        "https://express-development-3576.up.railway.app/api/v1/users/verify-otp",
+        "https://expressjs-production-53af.up.railway.app/api/v1/users/verify-otp",
         {
           email: email,
           otp: otpCode,
@@ -77,7 +77,7 @@ export default function Otp() {
   const handleResendOtp = async () => {
     try {
       await axios.put(
-        "https://express-development-3576.up.railway.app/api/v1/users/resend-otp",
+        "https://expressjs-production-53af.up.railway.app/api/v1/users/resend-otp",
         { email }
       );
       toast.success("OTP has been resent!");

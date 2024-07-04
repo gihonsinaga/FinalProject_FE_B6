@@ -10,7 +10,7 @@ export const DetailTicket = (props) => async (dispatch) => {
 
   try {
     const response = await axios.get(
-      `https://express-development-3576.up.railway.app/api/v1/ticket/flight/${props?.id}?passenger=${props?.passenger}`,
+      `https://expressjs-production-53af.up.railway.app/api/v1/ticket/flight/${props?.id}?passenger=${props?.passenger}`,
 
       {
         headers: { accept: "application/json" },

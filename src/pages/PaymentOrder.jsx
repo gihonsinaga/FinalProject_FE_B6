@@ -37,7 +37,7 @@ export default function PaymentOrder() {
   const payOrder = async () => {
     try {
       const response = await axios.get(
-        `https://express-development-3576.up.railway.app/api/v1/ticket/order/${idOrderPayment}`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/ticket/order/${idOrderPayment}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -120,7 +120,7 @@ export default function PaymentOrder() {
   const handlePayment = async () => {
     try {
       const response = await axios.post(
-        `https://express-development-3576.up.railway.app/api/v1/payment/${idOrderPayment}`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/payment/${idOrderPayment}`,
         {
           method_payment: methodPayment,
           cardNumber,
@@ -150,7 +150,7 @@ export default function PaymentOrder() {
   const handlePaymentMidtrans = async () => {
     try {
       const response = await axios.post(
-        `https://express-development-3576.up.railway.app/api/v1/payment/midtrans/${idOrderPayment}`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/payment/midtrans/${idOrderPayment}`,
         {
           method_payment: methodPayment,
         },

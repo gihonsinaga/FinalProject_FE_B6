@@ -109,6 +109,17 @@ export default function Notifikasi() {
       window.scrollTo(0, 0);
     }, []);
 
+    const token = useSelector((state) => state.auth.token);
+
+    useEffect(() => {
+      if (token == null) {
+        toast.error("Please login first");
+        setTimeout(() => {
+          navigate("/login");
+        }, 20);
+      }
+    }, [token, navigate]);
+
     return (
       <div
         className={`bg-white border shadow-md overflow-hidden sm:rounded-md mb-2  ${

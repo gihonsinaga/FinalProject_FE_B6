@@ -103,7 +103,7 @@ export default function AdminPemesanan() {
     const userCount = async () => {
       try {
         const response = await axios.get(
-          "https://express-development-3576.up.railway.app/api/v1/admin/count",
+          "https://expressjs-production-53af.up.railway.app/api/v1/admin/count",
           {
             headers: {
               Accept: "application/json",
@@ -131,7 +131,7 @@ export default function AdminPemesanan() {
   const fetchOrders = async () => {
     try {
       const response = await axios.get(
-        "https://express-development-3576.up.railway.app/api/v1/admin/all/order",
+        "https://expressjs-production-53af.up.railway.app/api/v1/admin/all/order",
         {
           headers: {
             accept: "application/json",

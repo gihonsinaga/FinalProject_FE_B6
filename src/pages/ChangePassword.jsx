@@ -17,7 +17,7 @@ export default function ChangePassword() {
       toast.error("Please login first");
       setTimeout(() => {
         navigate("/login");
-      }, 2000);
+      }, 20);
     }
   }, [token, navigate]);
 
@@ -36,7 +36,7 @@ export default function ChangePassword() {
 
     try {
       const response = await fetch(
-        "https://express-development-3576.up.railway.app/api/v1/profile/change-password",
+        "https://expressjs-production-53af.up.railway.app/api/v1/profile/change-password",
         {
           method: "PUT",
           headers: {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Nav from "../component/Nav";
 import loginPict from "../assets/login.png";
 import Footer from "../component/Footer";
@@ -8,10 +8,14 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 export default function AboutUS() {
   const handleInstagramClick = () => {
     window.open(
-      "https://www.instagram.com/gihon.sinaga?igsh=MW9hYnZ6MWNvYmczYw==",
+      "https://www.instagram.com/flynowfoundation?igsh=MWc2aGRwcDc4YnRqdg==",
       "_blank"
     );
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="min-h-screen bg-gray-100">
       <Nav />

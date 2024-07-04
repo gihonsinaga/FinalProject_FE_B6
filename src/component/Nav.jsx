@@ -253,13 +253,13 @@ export default function Nav({ isHomePage }) {
                       : "text-slate-700 border-slate-700"
                   } bg-transparent border rounded-xl transition-colors duration-300`}
                 >
-                  Login
+                  Masuk
                 </button>
                 <button
                   onClick={() => navigate("/Register")}
                   className="flex py-3 px-5 font-normal text-sm text-white bg-slate-600 rounded-xl"
                 >
-                  Register
+                  Daftar
                 </button>
               </div>
             </div>
@@ -436,7 +436,7 @@ export default function Nav({ isHomePage }) {
                   }}
                   className="block  mr-2 py-2 text-slate-900 text-xs border-slate-700 border p-4 "
                 >
-                  Login
+                  Masuk
                 </div>
 
                 <div
@@ -446,7 +446,7 @@ export default function Nav({ isHomePage }) {
                   }}
                   className="block py-2 text-white text-xs border-slate-700 border p-4 bg-slate-700 "
                 >
-                  Register
+                  Daftar
                 </div>
               </div>
             )}

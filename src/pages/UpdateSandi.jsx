@@ -51,7 +51,7 @@ export default function UpdateSandi() {
 
     try {
       const response = await fetch(
-        `https://express-development-3576.up.railway.app/api/v1/users/reset-password?token=${token}`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/users/reset-password?token=${token}`,
         {
           method: "PUT",
           headers: {
