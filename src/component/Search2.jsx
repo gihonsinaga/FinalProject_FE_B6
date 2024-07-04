@@ -59,11 +59,41 @@ export default function Search2() {
   const dispatch = useDispatch();
 
   // 1. from city , to city input user (sudah redux)
+  // const handleFromInputChange = (e) => {
+  //   dispatch(setFromDestination(e.target.value));
+  // };
+  // const handleToInputChange = (e) => {
+  //   dispatch(setToDestination(e.target.value));
+  // };
+
+  // const handleFromInputChange = (e) => {
+  //   dispatch(setFromDestination(e.target.value));
+  // };
+
+  const [toError, setToError] = useState("");
+  const [error, setError] = useState("");
+
   const handleFromInputChange = (e) => {
-    dispatch(setFromDestination(e.target.value));
+    const value = e.target.value;
+    if (value.trim() === "") {
+      setError("Input tidak boleh kosong");
+    } else {
+      setError("");
+      dispatch(setFromDestination(value));
+    }
   };
+  // const handleToInputChange = (e) => {
+  //   dispatch(setToDestination(e.target.value));
+  // };
+
   const handleToInputChange = (e) => {
-    dispatch(setToDestination(e.target.value));
+    const value = e.target.value;
+    if (value.trim() === "") {
+      setToError("Input tidak boleh kosong");
+    } else {
+      setToError("");
+      dispatch(setToDestination(value));
+    }
   };
 
   // 2. date jadwal penerbangan input user (sudah redux)
@@ -235,6 +265,8 @@ export default function Search2() {
                   placeholder="Masukkan Kota atau Negara"
                   className="border p-2  max-sm:text-sm max-sm:mt-2 sm:text-sm"
                 />
+                {error && <p className="text-red-500 text-xs">{error}</p>}
+
                 <button
                   type="button"
                   onClick={onCloseFromModal}
@@ -288,6 +320,8 @@ export default function Search2() {
                   placeholder="Masukkan Kota atau Negara tujuan"
                   className="border p-2 max-sm:text-sm max-sm:mt-2 sm:text-sm"
                 />
+                {toError && <p className="text-red-500 text-xs">{toError}</p>}
+
                 <button
                   type="button"
                   onClick={onCloseToModal}
