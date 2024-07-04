@@ -173,7 +173,7 @@ export default function AboutUS() {
                 </div>
                 <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
                   <img
-                    src={loginPict}
+                    src="assets/Akdhan.jpg"
                     alt="Anggota Tim 2"
                     className="w-full h-48 object-cover"
                   />
