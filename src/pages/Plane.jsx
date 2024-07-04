@@ -15,7 +15,7 @@ export default function Plane() {
     const getPlanes = async () => {
       try {
         const response = await axios.get(
-          "https://express-development-3576.up.railway.app/api/v1/planes"
+          "https://expressjs-production-53af.up.railway.app/api/v1/planes"
         );
         if (response.status === 200) {
           setPlanes(response.data.data);
@@ -39,7 +39,7 @@ export default function Plane() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://express-development-3576.up.railway.app/api/v1/plane/${id}`
+        `https://expressjs-production-53af.up.railway.app/api/v1/plane/${id}`
       );
       if (response.status === 200) {
         setDetailPlane(response.data.data);

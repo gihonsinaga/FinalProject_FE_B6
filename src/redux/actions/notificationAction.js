@@ -33,7 +33,7 @@ export const fetchNotifications =
       const queryString = queryParams.join("&");
 
       const response = await axios.get(
-        `https://express-development-3576.up.railway.app/api/v1/notifications?${queryString}`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/notifications?${queryString}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -75,7 +75,7 @@ export const postNotification = (data) => async (dispatch, getState) => {
     }
 
     const response = await axios.post(
-      "https://express-development-3576.up.railway.app/api/v1/admin/notifications",
+      "https://expressjs-production-53af.up.railway.app/api/v1/admin/notifications",
       data,
       {
         headers: {
@@ -100,7 +100,7 @@ export const updateNotificationStatus =
     try {
       const token = getState().auth.token;
       const response = await axios.put(
-        `https://express-development-3576.up.railway.app/api/v1/notification/markAsRead/${notificationId}`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/notification/markAsRead/${notificationId}`,
         {}, // Empty object as second argument for axios.put
         {
           headers: {
@@ -127,7 +127,7 @@ export const updateAllNotificationStatus = () => async (dispatch, getState) => {
   try {
     const token = getState().auth.token;
     const response = await axios.put(
-      `https://express-development-3576.up.railway.app/api/v1/notifications/markAsRead/all`,
+      `https://expressjs-production-53af.up.railway.app/api/v1/notifications/markAsRead/all`,
       {}, // Empty object as second argument for axios.put
       {
         headers: {

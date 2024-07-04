@@ -154,7 +154,7 @@ export default function AdminPemesanan() {
 
     try {
       const response = await fetch(
-        "https://express-development-3576.up.railway.app/api/v1/profile",
+        "https://expressjs-production-53af.up.railway.app/api/v1/profile",
         {
           method: "PUT",
           headers: {
@@ -211,7 +211,7 @@ export default function AdminPemesanan() {
     const userCount = async () => {
       try {
         const response = await axios.get(
-          "https://express-development-3576.up.railway.app/api/v1/admin/count",
+          "https://expressjs-production-53af.up.railway.app/api/v1/admin/count",
           {
             headers: {
               Accept: "application/json",

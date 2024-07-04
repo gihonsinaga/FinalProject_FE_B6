@@ -17,7 +17,7 @@ export default function LupaSandi() {
     event.preventDefault();
     try {
       const response = await fetch(
-        "https://express-development-3576.up.railway.app/api/v1/users/forget-password",
+        "https://expressjs-production-53af.up.railway.app/api/v1/users/forget-password",
         {
           method: "POST",
           headers: {

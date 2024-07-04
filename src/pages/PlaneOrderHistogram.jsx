@@ -34,7 +34,7 @@ const PlaneOrderHistogram = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "https://express-development-3576.up.railway.app/api/v1/admin/all/order",
+        "https://expressjs-production-53af.up.railway.app/api/v1/admin/all/order",
         {
           headers: {
             Accept: "application/json",

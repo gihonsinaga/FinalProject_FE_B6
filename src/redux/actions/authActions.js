@@ -14,7 +14,7 @@ export const login = (data, navigate, redirectTo) => async (dispatch) => {
   try {
     let config = {
       method: "post",
-      url: "https://express-development-3576.up.railway.app/api/v1/users/login",
+      url: "https://expressjs-production-53af.up.railway.app/api/v1/users/login",
       headers: {
         "Content-Type": "application/json",
       },
@@ -62,7 +62,7 @@ export const register = (data, navigate) => async (dispatch) => {
   try {
     let config = {
       method: "post",
-      url: "https://express-development-3576.up.railway.app/api/v1/users/register",
+      url: "https://expressjs-production-53af.up.railway.app/api/v1/users/register",
       headers: {
         "Content-Type": "application/json",
       },
@@ -120,7 +120,7 @@ export const authenticateUser = () => async (dispatch, getState) => {
     const token = getState().auth.token;
     if (token) {
       const response = await axios.get(
-        "https://express-development-3576.up.railway.app/api/v1/users/authenticate",
+        "https://expressjs-production-53af.up.railway.app/api/v1/users/authenticate",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -159,7 +159,7 @@ export const registerLoginWithGoogleAction =
       let config = {
         method: "post",
         maxBodyLength: Infinity,
-        url: "https://express-development-3576.up.railway.app/api/v1/users/loginGoogle",
+        url: "https://expressjs-production-53af.up.railway.app/api/v1/users/loginGoogle",
         headers: {
           "Content-Type": "application/json",
         },

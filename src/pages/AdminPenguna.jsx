@@ -197,7 +197,7 @@ export default function AdminPengguna() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://express-development-3576.up.railway.app/api/v1/admin/all/user",
+          "https://expressjs-production-53af.up.railway.app/api/v1/admin/all/user",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -219,7 +219,7 @@ export default function AdminPengguna() {
   const fetchUserDetails = async (userId) => {
     try {
       const userResponse = await axios.get(
-        `https://express-development-3576.up.railway.app/api/v1/admin/all/user`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/admin/all/user`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -231,7 +231,7 @@ export default function AdminPengguna() {
       );
 
       const orderResponse = await axios.get(
-        `https://express-development-3576.up.railway.app/api/v1/admin/order/user/${userId}`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/admin/order/user/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

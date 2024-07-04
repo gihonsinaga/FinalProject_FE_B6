@@ -68,7 +68,7 @@ export default function Profile() {
 
     try {
       const response = await fetch(
-        "https://express-development-3576.up.railway.app/api/v1/profile",
+        "https://expressjs-production-53af.up.railway.app/api/v1/profile",
         {
           method: "PUT",
           headers: {

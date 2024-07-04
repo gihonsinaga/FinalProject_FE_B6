@@ -32,7 +32,7 @@ export default function Payment() {
   const payOrder = async () => {
     try {
       const response = await axios.get(
-        `https://express-development-3576.up.railway.app/api/v1/ticket/order/${idOrder}`,
+        `https://expressjs-production-53af.up.railway.app/api/v1/ticket/order/${idOrder}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
