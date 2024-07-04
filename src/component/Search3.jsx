@@ -40,6 +40,8 @@ export default function Search3() {
   const onOpenSeatModal = () => setOpenSeatModal(true);
   const onCloseSeatModal = () => setOpenSeatModal(false);
 
+  const [toError, setToError] = useState("");
+
   //fungsi swap destinasi
   const swapDestinations = () => {
     const temp = fromDestination;
@@ -59,11 +61,31 @@ export default function Search3() {
   const dispatch = useDispatch();
 
   // 1. from city , to city input user (sudah redux)
+  // const handleFromInputChange = (e) => {
+  //   dispatch(setFromDestination(e.target.value));
+  // };
+
   const handleFromInputChange = (e) => {
-    dispatch(setFromDestination(e.target.value));
+    const value = e.target.value;
+    if (value.trim() === "") {
+      setError("Input tidak boleh kosong");
+    } else {
+      setError("");
+      dispatch(setFromDestination(value));
+    }
   };
+  // const handleToInputChange = (e) => {
+  //   dispatch(setToDestination(e.target.value));
+  // };
+
   const handleToInputChange = (e) => {
-    dispatch(setToDestination(e.target.value));
+    const value = e.target.value;
+    if (value.trim() === "") {
+      setToError("Input tidak boleh kosong");
+    } else {
+      setToError("");
+      dispatch(setToDestination(value));
+    }
   };
 
   // 2. date jadwal penerbangan input user (sudah redux)
@@ -160,6 +182,18 @@ export default function Search3() {
     onCloseToModal();
   };
 
+  const [error, setError] = useState("");
+
+  // const handleFromInputChangee = (event) => {
+  //   const value = event.target.value;
+  //   if (value.trim() === "") {
+  //     setError("Input tidak boleh kosong");
+  //   } else {
+  //     setError("");
+  //     setFromDestination(value);
+  //   }
+  // };
+
   useEffect(() => {
     getCity();
   }, []);
@@ -234,6 +268,7 @@ export default function Search3() {
                       placeholder="Masukkan Kota atau Negara"
                       className="border p-2  max-sm:text-sm max-sm:mt-2 sm:text-sm"
                     />
+                    {error && <p className="text-red-500 text-xs">{error}</p>}
                     <button
                       type="button"
                       onClick={onCloseFromModal}
@@ -302,6 +337,7 @@ export default function Search3() {
                   placeholder="Masukkan Kota atau Negara tujuan"
                   className="border p-2 max-sm:text-sm max-sm:mt-2 sm:text-sm"
                 />
+                {toError && <p className="text-red-500 text-xs">{toError}</p>}
                 <button
                   type="button"
                   onClick={onCloseToModal}
